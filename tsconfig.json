@@ -16,5 +16,6 @@
       "es2018",
       "dom"
     ]
-  }
+  },
+  "rules": { "interface-name" : [true, "never-prefix"] }
 }

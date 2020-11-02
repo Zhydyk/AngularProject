@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/components/shared.module';
-import { FeatureModule } from './features/feature.module';
+import { CoursePageModule } from './course-page/course-page.module';
 
 @NgModule({
   declarations: [
@@ -13,8 +12,7 @@ import { FeatureModule } from './features/feature.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
-    FeatureModule,
+    CoursePageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

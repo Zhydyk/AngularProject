@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AnfularMentoringHeaderComponent } from './shared/components/anfular-mentoring-header/anfular-mentoring-header.component';
+import { CoursePageModule } from './course-page/course-page.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnfularMentoringHeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoursePageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

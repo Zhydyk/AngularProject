@@ -1,0 +1,17 @@
+.course-search {
+  &-container {
+    margin: 20px 0;
+  }
+}
+
+input {
+  border-radius: 3px;
+  border: 1px solid #ced0db;
+  background: #ffffff;
+  box-sizing: border-box;
+  border-color: #ced0db;
+  border-width: 1px;
+  border-style: solid;
+  margin-right: 15px;
+  padding: 8px;
+}

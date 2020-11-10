@@ -1,1 +1,6 @@
-<p>course-lists works!</p>
+<course-card
+  *ngFor="let course of courseLists"
+  [course]="course"
+  (emitDeleteCourse)="onDeleteCourse($event)"
+>
+</course-card>

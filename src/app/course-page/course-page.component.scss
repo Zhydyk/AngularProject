@@ -1,0 +1,30 @@
+$bgColorContainer: #d1cfcf60;
+$bgColorTitleContainer: #ffffff;
+
+.course-page {
+  &-main {
+    background: $bgColorContainer;
+  }
+
+  &-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+  &-title-container {
+    background: $bgColorTitleContainer;
+
+  }
+
+  &-title {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 10px;
+  }
+
+  &-search {
+    margin-top: 15px;
+  }
+
+}

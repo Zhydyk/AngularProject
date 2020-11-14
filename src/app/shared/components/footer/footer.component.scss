@@ -1,9 +1,9 @@
-$footerBgColor: #303240;
+@import '../../../../styles/main.scss';
 
 .footer {
   &-page {
     min-height: 60px;
-    background-color: $footerBgColor;
+    background-color: $bgGreyColor;
   }
 
   &-container {
@@ -21,7 +21,7 @@ $footerBgColor: #303240;
     text-align: right;
     line-height: 24px;
     letter-spacing: 0;
-    color: #FFFFFF;
+    color: map-get($app-primary-text, whiteColor);
     font-size: 12px;
   }
 }

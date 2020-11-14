@@ -1,9 +1,8 @@
-$bgColorContainer: #d1cfcf60;
-$bgColorTitleContainer: #ffffff;
+@import '../../styles/main.scss';
 
 .course-page {
   &-main {
-    background: $bgColorContainer;
+    background: map-get($app-primary-bg-palette, greyColor);
   }
 
   &-container {
@@ -13,7 +12,7 @@ $bgColorTitleContainer: #ffffff;
   }
 
   &-title-container {
-    background: $bgColorTitleContainer;
+    background: map-get($app-primary-bg-palette, mainColor);
 
   }
 

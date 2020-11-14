@@ -1,10 +1,11 @@
-$headerBackgroundColor: #303240;
-$borderColor: #ffffff;
+@import '../../../../styles/main.scss';
+
+
 
 .header {
   &-page {
     min-height: 60px;
-    background-color: $headerBackgroundColor;
+    background-color: $bgGreyColor;
   }
 
   &-container {
@@ -42,7 +43,7 @@ $borderColor: #ffffff;
     border-width: 2px;
     border-radius: 50%;
     border-style: solid;
-    border-color: $borderColor;
+    border-color: $borderColorWhite;
     height: 28px;
     width: 28px;
   }
@@ -55,7 +56,16 @@ $borderColor: #ffffff;
     left: 50%;
     transform: translate(-36%,-50%);
     border-top: 5px solid transparent;
-    border-left: 8px solid $borderColor;
+    border-left: 8px solid $borderColorWhite;
     border-bottom: 5px solid transparent;
   }
+}
+
+.user-login-btn {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: map-get($app-primary-text, whiteColor);
+  font-size: 14px;
+  border: 0;
+  background: none;
 }

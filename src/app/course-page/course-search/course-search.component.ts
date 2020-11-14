@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'course-search',
@@ -8,7 +8,10 @@ import { Component } from '@angular/core';
 export class CourseSearchComponent {
   public courseSearch: string;
 
+  @Output()
+  public emitSearchElement: EventEmitter<string> = new EventEmitter<string>();
+
   public searchCourse(searchElement): void {
-    console.log(searchElement);
+    this.emitSearchElement.emit(searchElement);
   }
 }

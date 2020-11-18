@@ -1,0 +1,60 @@
+@import '../../../../styles/main.scss';
+
+.course-card {
+  &-container {
+    border: 1px solid $borderColorLightGrey;
+    box-shadow: 0 0 10px $borderColorLightGrey;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px 0;
+    background: map-get($app-primary-bg-palette, mainColor);
+  }
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  &-description {
+    width: 80%;
+    margin: 0;
+  }
+
+  &-buttons {
+    width: 20%;
+    text-align: right;
+  }
+}
+
+.primary-button {
+  border-radius: 3px;
+  background: $bgBlueBtnColor;
+  padding: 5px 8px;
+  color: map-get($app-primary-text, whiteColor);
+  border: 0;
+  margin: 0 7px;
+  line-height: 12px;
+  letter-spacing: -0.1px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  .course-card {
+    &-content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &-description {
+      width: 100%;
+    }
+
+    &-buttons {
+      width: 100%;
+      margin-top: 15px;
+      text-align: left;
+    }
+  }
+}

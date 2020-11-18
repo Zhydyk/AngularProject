@@ -1,7 +1,19 @@
 <app-header></app-header>
-<hr>
-<p>course-page works!</p>
-<course-search></course-search>
-<course-lists></course-lists>
-<hr>
+<div class="course-page-main">
+  <div class="course-page-title-container">
+    <h4 class="h4 course-page-title">Courses</h4>
+  </div>
+  <div class="course-page-container">
+    <div class="course-page-search">
+      <course-search
+        (emitSearchElement)="searchElement($event)"
+      >
+      </course-search>
+    </div>
+    <course-lists
+      [courseLists]="courses"
+    >
+    </course-lists>
+  </div>
+</div>
 <app-footer></app-footer>

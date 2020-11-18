@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { Courses } from 'src/app/models/course.interface';
 
 @Component({
   selector: 'course-card',
@@ -6,11 +13,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./course-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent {
+  @Input()
+  public course: Courses;
 
-  constructor() { }
+  @Output()
+  public emitDeleteCourse: EventEmitter<number> = new EventEmitter<number>();
 
-  ngOnInit(): void {
-  }
-
+  public deleteCourse(): void {
+    this.emitDeleteCourse.emit(this.course.id);
+  } 
 }

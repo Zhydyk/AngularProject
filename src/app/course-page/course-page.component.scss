@@ -1,0 +1,29 @@
+@import '../../styles/main.scss';
+
+.course-page {
+  &-main {
+    background: map-get($app-primary-bg-palette, greyColor);
+  }
+
+  &-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+  &-title-container {
+    background: map-get($app-primary-bg-palette, mainColor);
+
+  }
+
+  &-title {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 10px;
+  }
+
+  &-search {
+    margin-top: 15px;
+  }
+
+}

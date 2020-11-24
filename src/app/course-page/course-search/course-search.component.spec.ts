@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { CourseSearchComponent } from './course-search.component';
 
@@ -19,7 +20,14 @@ describe('CourseSearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create CourseSearchComponent', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should search course-card', () => {
+		spyOn(component.search, 'emit');
+		const searchButton = fixture.debugElement.query(By.css('.search-button'));
+		searchButton.triggerEventHandler('click', null);
+		expect(component.search.emit).toHaveBeenCalledWith(undefined);
+	});
 });

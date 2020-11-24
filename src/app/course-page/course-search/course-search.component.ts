@@ -9,9 +9,9 @@ export class CourseSearchComponent {
   public courseSearch: string;
 
   @Output()
-  public emitSearchElement: EventEmitter<string> = new EventEmitter<string>();
+  public search: EventEmitter<string> = new EventEmitter<string>();
 
   public searchCourse(searchElement): void {
-    this.emitSearchElement.emit(searchElement);
+    this.search.emit(searchElement);
   }
 }

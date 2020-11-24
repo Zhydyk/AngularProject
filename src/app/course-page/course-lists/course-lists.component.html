@@ -1,6 +1,6 @@
 <course-card
   *ngFor="let course of courseLists"
   [course]="course"
-  (emitDeleteCourse)="onDeleteCourse($event)"
+  (delete)="onDeleteCourse($event)"
 >
 </course-card>

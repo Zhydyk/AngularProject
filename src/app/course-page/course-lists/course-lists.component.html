@@ -1,6 +1,15 @@
-<course-card
-  *ngFor="let course of courseLists"
-  [course]="course"
-  (delete)="onDeleteCourse($event)"
->
-</course-card>
+<div *ngIf="courseLists; else noDataAboutCourseList">
+  <course-card
+    *ngFor="let course of courseLists | orderBy"
+    [coursePlate]="course?.creationDate"
+    [course]="course"
+    (delete)="onDeleteCourse($event)"
+  >
+  </course-card>
+</div>
+
+<ng-template #noDataAboutCourseList>
+  <div class="course-lists-no-data">
+    NO DATA FEEL FREE TO ADD NEW COURSE
+  </div>
+</ng-template>

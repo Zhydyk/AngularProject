@@ -1,5 +1,17 @@
 <div class="course-card-container">
-  <h1 class="h1">{{ course.title }}</h1>
+  <div class="course-card-header">
+    <h1 class="h1">{{ course.title | uppercase }}</h1>
+    <section class="course-card-date-time-info">
+      <div class="course-card-time-section course-card-section">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        {{ course.duration | duration }}
+      </div>
+      <div class="course-card-date-section course-card-section">
+        <i class="fa fa-calendar-o" aria-hidden="true"></i>
+        {{ course?.creationDate | date: 'dd/MM/yyyy'}}
+      </div>
+    </section>
+  </div>
   <div class="course-card-content">
     <p class="course-card-description">{{ course.description }}</p>
     <div class="course-card-buttons">

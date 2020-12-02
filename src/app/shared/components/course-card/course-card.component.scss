@@ -1,4 +1,16 @@
-@import '../../../../styles/main.scss';
+@import 'src/styles/main.scss';
+
+:host {
+  &.fresh {
+    border-color: $borderColorBlue;
+  }
+}
+
+:host {
+  &.upcomming {
+    border-color: $borderColorGreen;
+  }
+}
 
 .course-card {
   &-container {
@@ -8,6 +20,20 @@
     padding: 10px;
     margin: 20px 0;
     background: map-get($app-primary-bg-palette, mainColor);
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-date-time-info {
+    display: flex;
+  }
+
+  &-section {
+    margin-right: 10px;
+    color: $dateAndTimeColor;
   }
 
   &-content {

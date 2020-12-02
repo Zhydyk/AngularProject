@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Courses } from '../models/course.interface';
+import { FilterPipe } from '../shared/filter.pipe';
 
 @Component({
   selector: 'course-page',
@@ -32,21 +33,26 @@ export class CoursePageComponent {
     {
       id: 4,
       title: 'Mentoring Program 4',
-      creationDate: new Date('2020/08/23'),
-      duration: 200,
+      creationDate: new Date('2021/08/23'),
+      duration: 500,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
     },
     {
       id: 5,
       title: 'Program 5',
       creationDate: new Date('2020/10/23'),
-      duration: 10,
+      duration: 59,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
     },
   ];
 
-  public searchElement(course: string): void {
-    console.log(course);
+  public filterCourse: Courses[];
+
+  constructor(private filterPipe: FilterPipe) {}
+
+  public searchElement(searchCourse: string): void {
+    this.filterCourse = this.courses;
+    this.filterCourse = this.filterPipe.transform(this.courses, searchCourse);
   }
 
   public onDeleteCourse(id: number): void {

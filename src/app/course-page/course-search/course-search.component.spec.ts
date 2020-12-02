@@ -1,11 +1,15 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { CourseSearchComponent } from './course-search.component';
 
+const searchText = 'search text';
+
 describe('CourseSearchComponent', () => {
   let component: CourseSearchComponent;
   let fixture: ComponentFixture<CourseSearchComponent>;
+  let buttonElem: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,10 +28,18 @@ describe('CourseSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should search course-card', () => {
+  it('searchCourse method should be called', () => {
+    spyOn(component, 'searchCourse');
+    buttonElem = fixture.debugElement.query(By.css('.search-button'));
+    fixture.detectChanges();
+    buttonElem.triggerEventHandler('click', null);
+    expect(component.searchCourse).toHaveBeenCalled();
+  });
+
+  it('course search to have been called with', () => {
+    component.courseSearch = searchText;
 		spyOn(component.search, 'emit');
-		const searchButton = fixture.debugElement.query(By.css('.search-button'));
-		searchButton.triggerEventHandler('click', null);
-		expect(component.search.emit).toHaveBeenCalledWith(undefined);
+		component.searchCourse(searchText);
+		expect(component.search.emit).toHaveBeenCalledWith(searchText);
 	});
 });

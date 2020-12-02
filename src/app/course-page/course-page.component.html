@@ -12,6 +12,7 @@
     </div>
     <course-lists
       [courseLists]="courses"
+      (deleteCourse)="onDeleteCourse($event)"
     >
     </course-lists>
   </div>

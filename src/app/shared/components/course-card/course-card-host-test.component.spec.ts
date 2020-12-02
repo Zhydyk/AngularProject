@@ -18,7 +18,7 @@ class CourseCardHostTestComponent {
         id: 1,
         title: 'Mentoring program 1',
         creationDate: new Date('2020/01/01'),
-        duration: { hours: 1, minutes: 40 },
+        duration: 9,
         description: 'Lorem ipsum',
     };
 

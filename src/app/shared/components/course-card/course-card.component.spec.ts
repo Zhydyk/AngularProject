@@ -9,7 +9,7 @@ const mockCourse: Courses = {
   id: 1,
   title: 'Mentoring Program 1',
   creationDate: new Date('2020/01/01'),
-  duration: {hours: 1, minutes: 40},
+  duration: 140,
   description: 'Lorem ipsum'
 };
 

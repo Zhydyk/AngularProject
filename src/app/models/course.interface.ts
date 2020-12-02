@@ -4,6 +4,6 @@ export interface Courses {
   id: number;
   title: string;
   creationDate: Date;
-  duration: Time;
+  duration: number;
   description: string;
 }

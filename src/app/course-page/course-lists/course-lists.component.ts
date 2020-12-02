@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Courses } from 'src/app/models/course.interface';
 
 @Component({
@@ -10,7 +10,10 @@ export class CourseListsComponent {
   @Input()
   public courseLists: Courses[];
 
+  @Output()
+  public deleteCourse = new EventEmitter<number>();
+
   public onDeleteCourse(id: number):void {
-    this.courseLists = this.courseLists.filter((course: Courses) => course.id !== id);
+    this.deleteCourse.emit(id);
   }
 }

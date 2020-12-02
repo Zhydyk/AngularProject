@@ -1,7 +1,9 @@
+import { Time } from '@angular/common';
+
 export interface Courses {
   id: number;
   title: string;
-  creationDate: string;
+  creationDate: Date;
   duration: number;
   description: string;
 }

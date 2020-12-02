@@ -19,7 +19,7 @@ describe('CoursePageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create CoursePageComponent', () => {
     expect(component).toBeTruthy();
   });
 });

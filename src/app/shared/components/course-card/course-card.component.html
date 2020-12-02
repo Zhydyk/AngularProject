@@ -3,11 +3,11 @@
   <div class="course-card-content">
     <p class="course-card-description">{{ course.description }}</p>
     <div class="course-card-buttons">
-      <button class="primary-button">
+      <button class="primary-button edit-btn" (click)="editCourse()">
         <i class="fa fa-pencil" aria-hidden="true"></i>
         Edit
       </button>
-      <button class="primary-button" (click)="deleteCourse()">
+      <button class="primary-button delete-btn" (click)="deleteCourse()">
         <i class="fa fa-trash" aria-hidden="true"></i>
         Delete
       </button>

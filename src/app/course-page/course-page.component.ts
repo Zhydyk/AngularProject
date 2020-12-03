@@ -12,14 +12,15 @@ export class CoursePageComponent {
     {
       id: 1,
       title: 'Mentoring Program 1',
-      creationDate: new Date('2020/02/09'),
+      creationDate: new Date('2020/12/03'),
       duration: 60,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
+      topRated: true,
     },
     {
       id: 2,
       title: 'Mentoring Program 2',
-      creationDate: new Date('2020/01/01'),
+      creationDate: new Date('2020/10/30'),
       duration: 8,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
     },
@@ -29,6 +30,7 @@ export class CoursePageComponent {
       creationDate: new Date('2020/10/01'),
       duration: 15,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
+      topRated: true,
     },
     {
       id: 4,

@@ -2,6 +2,7 @@
   <course-card
     *ngFor="let course of courseLists | orderBy"
     [coursePlate]="course?.creationDate"
+    [ngClass]="{topCourse: course?.topRated}"
     [course]="course"
     (delete)="onDeleteCourse($event)"
   >

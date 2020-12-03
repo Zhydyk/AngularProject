@@ -8,20 +8,28 @@ export class CoursePlateDirective implements OnInit{
 
   constructor(private element: ElementRef, private render: Renderer2) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.changeBorder();
   }
 
   public changeBorder(): void {
-    const currentDate = Date.now();
-    const creationDate = this.date.getDate();
+    const currentDate = +Date.now();
+    const creationDate = +new Date(this.date);
     const milisecondsPerDay = 86400000;
-
-    if (creationDate < currentDate && creationDate >= (currentDate - 14 * milisecondsPerDay)) {
+    const isFresh = creationDate < currentDate && creationDate >= (currentDate - 14 * milisecondsPerDay)
+    console.log('currentDate', currentDate)
+    console.log('creationDate', creationDate)
+    console.log('isFresh', isFresh)
+    if (isFresh) {
+      console.log('isFresh');
       this.render.addClass(this.element.nativeElement, 'fresh');
-    }
-    else if (creationDate > currentDate) {
+    } 
+    if (creationDate > currentDate) {
+      console.log('isCurrent');
       this.render.addClass(this.element.nativeElement, 'upcoming');
+    }
+    else {
+      console.log('aaaaaaaaaaaaa');
     }
   }
 

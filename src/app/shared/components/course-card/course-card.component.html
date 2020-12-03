@@ -1,6 +1,9 @@
 <div class="course-card-container">
   <div class="course-card-header">
-    <h1 class="h1">{{ course.title | uppercase }}</h1>
+    <div class="course-card-header-with-rated">
+      <h1 class="h1">{{ course.title | uppercase }}</h1>
+      <img src="assets/icons/star.svg" alt="img" class="icon star-icon" *ngIf="course.topRated" />
+    </div>
     <section class="course-card-date-time-info">
       <div class="course-card-time-section course-card-section">
         <i class="fa fa-clock-o" aria-hidden="true"></i>

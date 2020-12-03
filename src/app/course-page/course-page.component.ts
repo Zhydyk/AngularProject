@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Courses } from '../models/course.interface';
-import { FilterPipe } from '../shared/filter.pipe';
+import { FilterPipe } from '../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'course-page',

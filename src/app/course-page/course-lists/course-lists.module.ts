@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CourseCardModule } from 'src/app/shared/components/course-card/course-card.module';
 import { CoursePlateDirective } from 'src/app/shared/directives';
-import { FilterPipe } from 'src/app/shared/filter.pipe';
-import { OrderByPipe } from 'src/app/shared/order-by.pipe';
+import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
+import { OrderByPipe } from 'src/app/shared/pipes/order-by.pipe';
 import { CourseListsComponent } from './course-lists.component';
 
 @NgModule({

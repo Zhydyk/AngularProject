@@ -1,0 +1,49 @@
+<app-header></app-header>
+<section class="login-page-main">
+  <div class="login-page-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h1 class="h1">Login</h1>
+      <div class="login-page-form-field">
+        <label for="email" class="login-page-form-field-label">
+          Email:
+          <span class="login-page-form-field-required">
+            * required
+          </span>
+        </label>
+        <input
+          type="text"
+          id="email"
+          class="login-page-form-field-input"
+          placeholder="Enter e-mail"
+          formControlName="email"
+        >
+      </div>
+      <div class="login-page-form-field">
+        <label for="password" class="login-page-form-field-label">
+          Password:
+          <span class="login-page-form-field-required">
+            * required
+          </span>
+        </label>
+        <input
+          type="password"
+          id="password"
+          class="login-page-form-field-input"
+          placeholder="Enter password"
+          formControlName="password"
+        >
+      </div>
+      <div class="login-page-buttons">
+        <a class="login-page-buttons-link">Forgot password?</a>
+        <button
+          type="submit"
+          [disabled]="!loginForm.valid"
+          class="login-page-buttons-login"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+<app-footer></app-footer>

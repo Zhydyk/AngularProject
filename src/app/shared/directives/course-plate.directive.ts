@@ -19,8 +19,7 @@ export class CoursePlateDirective implements OnInit{
     const isFresh = creationDate < currentDate && creationDate >= (currentDate - 14 * milisecondsPerDay)
     if (isFresh) {
       this.render.addClass(this.element.nativeElement, 'fresh');
-    } 
-    if (creationDate > currentDate) {
+    } else{
       this.render.addClass(this.element.nativeElement, 'upcoming');
     }
   }

@@ -1,6 +1,4 @@
-@import '../../../../styles/main.scss';
-
-
+@import 'src/styles/main.scss';
 
 .header {
   &-page {
@@ -59,13 +57,4 @@
     border-left: 8px solid $borderColorWhite;
     border-bottom: 5px solid transparent;
   }
-}
-
-.user-login-btn {
-  line-height: 24px;
-  letter-spacing: 0;
-  color: map-get($app-primary-text, whiteColor);
-  font-size: 14px;
-  border: 0;
-  background: none;
 }

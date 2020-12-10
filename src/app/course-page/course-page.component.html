@@ -1,4 +1,6 @@
-<app-header></app-header>
+<app-header>
+  <login-buttons></login-buttons>
+</app-header>
 <div class="course-page-main">
   <div class="course-page-title-container">
     <h4 class="h4 course-page-title">Courses</h4>
@@ -9,7 +11,7 @@
       </course-search>
     </div>
     <course-lists
-      [courseLists]="filterCourse"
+      [courseLists]="filteredCourses"
       (deleteCourse)="onDeleteCourse($event)"
     >
     </course-lists>

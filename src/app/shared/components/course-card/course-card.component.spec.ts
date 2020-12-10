@@ -7,9 +7,9 @@ import { CourseCardModule } from './course-card.module';
 
 const mockCourse: Courses = {
   id: 1,
-  title: 'Mentoring Program 1',
+  title: 'MENTORING PROGRAM 1',
   creationDate: new Date('2020/01/01'),
-  duration: 140,
+  duration: 150,
   description: 'Lorem ipsum'
 };
 

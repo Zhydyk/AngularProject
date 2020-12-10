@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Courses } from 'src/app/models/course.interface';
+import { DurationPipe } from '../../duration.pipe';
 import { CourseCardComponent } from './course-card.component';
 
 @Component({
@@ -16,9 +17,9 @@ import { CourseCardComponent } from './course-card.component';
 class CourseCardHostTestComponent {
     course: Courses = {
         id: 1,
-        title: 'Mentoring program 1',
+        title: 'MENTORING PROGRAM 1',
         creationDate: new Date('2020/01/01'),
-        duration: 9,
+        duration: 170,
         description: 'Lorem ipsum',
     };
 
@@ -34,13 +35,13 @@ class CourseCardHostTestComponent {
     }
 }
 
-describe('CourseItemComponent', () => {
+describe('CourseCardHostTestComponent', () => {
     let testingHost: CourseCardHostTestComponent;
     let fixture: ComponentFixture<CourseCardHostTestComponent>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [CourseCardComponent, CourseCardHostTestComponent],
+            declarations: [CourseCardComponent, CourseCardHostTestComponent, DurationPipe],
         });
         fixture = TestBed.createComponent(CourseCardHostTestComponent);
         testingHost = fixture.componentInstance;

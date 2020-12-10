@@ -1,24 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Courses } from '../models/course.interface';
+import { FilterPipe } from '../shared/pipes/filter/filter.pipe';
 
 @Component({
   selector: 'course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss'],
 })
-export class CoursePageComponent {
+export class CoursePageComponent implements OnInit{
   public courses: Courses[] = [
     {
       id: 1,
       title: 'Mentoring Program 1',
-      creationDate: new Date('2020/02/09'),
+      creationDate: new Date('2020/12/03'),
       duration: 60,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
+      topRated: true,
     },
     {
       id: 2,
       title: 'Mentoring Program 2',
-      creationDate: new Date('2020/01/01'),
+      creationDate: new Date('2020/10/30'),
       duration: 8,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
     },
@@ -28,25 +30,33 @@ export class CoursePageComponent {
       creationDate: new Date('2020/10/01'),
       duration: 15,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
+      topRated: true,
     },
     {
       id: 4,
       title: 'Mentoring Program 4',
-      creationDate: new Date('2020/08/23'),
-      duration: 200,
+      creationDate: new Date('2021/08/23'),
+      duration: 500,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
     },
     {
       id: 5,
       title: 'Program 5',
       creationDate: new Date('2020/10/23'),
-      duration: 10,
+      duration: 59,
       description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
     },
   ];
+  public filterCourse: Courses[];
 
-  public searchElement(course: string): void {
-    console.log(course);
+  constructor(private filterPipe: FilterPipe) {}
+
+  public ngOnInit(): void {
+    this.filterCourse = this.courses;
+  }
+
+  public searchElement(searchCourse: string): void {
+    this.filterCourse = this.filterPipe.transform(this.courses, searchCourse);
   }
 
   public onDeleteCourse(id: number): void {

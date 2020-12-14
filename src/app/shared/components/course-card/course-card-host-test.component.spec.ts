@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Courses } from 'src/app/models/course.interface';
-import { DurationPipe } from '../../duration.pipe';
+import { DurationPipe } from '../../pipes/duration/duration.pipe';
 import { CourseCardComponent } from './course-card.component';
 
 @Component({

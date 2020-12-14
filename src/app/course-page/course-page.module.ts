@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FooterModule } from '../shared/components/footer/footer.module';
+import { BreadcrumbsModule } from '../shared/components/breadcrumbs/breadcrumbs.module';
+import { DeleteModalModule } from '../shared/components/delete-modal/delete-modal.module';
 import { HeaderModule } from '../shared/components/header/header.module';
 import { LoginButtonsModule } from '../shared/components/login-buttons/login-buttons.module';
 import { CourseListsModule } from './course-lists/course-lists.module';
@@ -13,8 +14,9 @@ import { CourseSearchModule } from './course-search/course-search.module';
     CourseSearchModule,
     CourseListsModule,
     HeaderModule,
-    FooterModule,
     LoginButtonsModule,
+    DeleteModalModule,
+    BreadcrumbsModule
   ],
   declarations: [CoursePageComponent],
   exports: [CoursePageComponent],

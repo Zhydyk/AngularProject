@@ -1,11 +1,15 @@
 @import 'src/styles/main.scss';
 
-.footer {
-  &-page {
-    min-height: 60px;
-    background-color: $bgGreyColor;
-  }
+:host {
+  position: sticky;
+  display: block;
+  bottom: 0;
+  left: 0;
+  min-height: 60px;
+  background-color: $bgGreyColor;
+}
 
+.footer {
   &-container {
     display: flex;
     height: 60px;

@@ -10,6 +10,10 @@ import { CoursePageService } from '../shared/services/course-page.service';
 })
 export class CoursePageComponent {
   public filterCourse: Courses[];
+  public descriptionForModal: string;
+  public titleModal = 'Delete course?';
+  public showModal = false;
+  public course: Courses;
 
   constructor(private filterPipe: FilterPipe, private coursePageService: CoursePageService) {}
 
@@ -25,10 +29,19 @@ export class CoursePageComponent {
     this.filterCourse = this.filterPipe.transform(this.courses, searchCourse);
   }
 
-  public onDeleteCourse(id: number) {
-    const confirmationDelete = confirm('Do you really want to delete this course? Yes/No');
-    if (confirmationDelete) {
-      this.coursePageService.removeItem(id);
-    }
+  public hideModal() {
+    this.showModal = false;
+  }
+
+  public confirmDelete() {
+    this.showModal = false;
+    this.coursePageService.removeItem(this.course);
+  }
+
+  public onDeleteCourse(course: Courses) {
+    this.descriptionForModal = `Are you sure you want to delete`
+    + ` ${course.title}`;
+    this.showModal = true;
+    this.course = course;
   }
 }

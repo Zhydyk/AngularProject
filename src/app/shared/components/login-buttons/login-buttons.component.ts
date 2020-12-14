@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'login-buttons',
   templateUrl: './login-buttons.component.html',
-  styleUrls: ['./login-buttons.component.scss']
+  styleUrls: ['./login-buttons.component.scss'], 
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginButtonsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class LoginButtonsComponent {}

@@ -61,7 +61,7 @@ export class CoursePageService {
     return [...this.courses, course];
   }
 
-  public removeItem(id: number): void {
-    this.courses = this.courses.filter(item => item.id !== id);
+  public removeItem(course: Courses): void {
+    this.courses = this.courses.filter(item => item.id !== course.id);
   }
 }

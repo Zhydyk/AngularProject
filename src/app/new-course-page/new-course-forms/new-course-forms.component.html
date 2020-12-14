@@ -1,0 +1,32 @@
+<form class="new-course-forms-wrapper">
+  <div class="new-course-forms-title">
+    <label for="title" class="new-course-forms-label">Title:<span>* required</span></label>
+    <input
+      class="new-course-forms-input"
+      type="text"
+      id="new-course-forms-title"
+      placeholder="Text input"
+      required
+    >
+  </div>
+  <div class="new-course-forms-description">
+    <label for="title" class="new-course-forms-label">Description:<span>* required</span></label>
+    <textarea
+      class="new-course-forms-textarea"
+      name="description"
+      placeholder="Add description"
+      id="new-course-forms-description"
+      cols="30"
+      rows="10"
+      required
+    >
+    </textarea>
+  </div>
+  <div class="new-course-forms-date-duration">
+    <course-duration></course-duration>
+    <course-date></course-date>
+  </div>
+  <div class="new-course-forms-authors">
+    <course-authors></course-authors>
+  </div>
+</form>

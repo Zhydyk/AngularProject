@@ -11,9 +11,9 @@ export class CourseListsComponent {
   public courseLists: Courses[];
 
   @Output()
-  public deleteCourse = new EventEmitter<number>();
+  public deleteCourse = new EventEmitter<Courses>();
 
-  public onDeleteCourse(id: number):void {
-    this.deleteCourse.emit(id);
+  public onDeleteCourse(course: Courses): void {
+    this.deleteCourse.emit(course);
   }
 }

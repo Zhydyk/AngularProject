@@ -1,0 +1,15 @@
+<div *ngIf="isModalOpen" class="delete-modal-container">
+  <div class="delete-modal-content">
+    <div class="delete-modal-header">
+      <h2 class="h2">{{title}}</h2>
+      <i class="fa fa-times close" aria-hidden="true" (click)="onCloseDeleteModal()"></i>
+    </div>
+    <div class="delete-modal-main-text">
+      {{description}}
+    </div>
+    <div class="delete-modal-buttons">
+      <button class="delete-modal-cancel-button" (click)="onCloseDeleteModal()">Cancel</button>
+      <button class="delete-modal-confirm-button" (click)="onSubmitDeleteModal()">Yes, delete</button>
+    </div>
+  </div>
+</div>

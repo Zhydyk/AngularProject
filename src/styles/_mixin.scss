@@ -1,0 +1,4 @@
+@mixin page-size {
+  display: block;
+  min-height: calc(100vh - 60px);
+}

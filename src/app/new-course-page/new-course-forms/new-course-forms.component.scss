@@ -41,4 +41,9 @@
     width: 100%;
     border: 1px solid $borderColorLightGrey;
   }
+
+  &-submit-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
 }

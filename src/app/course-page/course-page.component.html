@@ -2,13 +2,12 @@
   <login-buttons></login-buttons>
 </app-header>
 <div class="course-page-main">
-  <div class="course-page-title-container">
-    <h4 class="h4 course-page-title">Courses</h4>
-  </div>
+  <breadcrumbs>
+    <a href="#" class="breadcrumbs-text">Courses</a>
+  </breadcrumbs>
   <div class="course-page-container">
     <div class="course-page-search">
-      <course-search (search)="searchElement($event)">
-      </course-search>
+      <course-search (search)="searchElement($event)"> </course-search>
     </div>
     <course-lists
       [courseLists]="filteredCourses"
@@ -17,4 +16,12 @@
     </course-lists>
   </div>
 </div>
-<app-footer></app-footer>
+
+<delete-modal
+  [title]="titleModal"
+  [description]="descriptionForModal"
+  [isModalOpen]="showModal"
+  (showDeleteModal)="hideModal()"
+  (showDeleteModal)="confirmDelete()"
+>
+</delete-modal>

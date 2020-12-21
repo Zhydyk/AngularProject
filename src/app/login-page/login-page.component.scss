@@ -2,9 +2,8 @@
 
 .login-page {
 	&-main {
-		display: block;
+		@include page-size;
 		position: relative;
-		min-height: calc(100vh - 60px);
 		background: map-get($app-primary-bg-palette, greyColor);
 	}
 

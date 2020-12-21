@@ -1,0 +1,17 @@
+@import 'src/styles/main.scss';
+
+:host {
+  @include page-size;
+}
+
+.new-course-page {
+  &-main {
+    background: map-get($app-primary-bg-palette, greyColor);
+  }
+
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,15 @@
+@import 'src/styles/main.scss';
+
+.breadcrumbs {
+  &-main {
+    background: map-get($app-primary-bg-palette, mainColor);
+    padding: 20px 10px;
+  }
+
+  &-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+}

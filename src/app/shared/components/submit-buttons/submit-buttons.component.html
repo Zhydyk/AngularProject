@@ -1,0 +1,20 @@
+<div class="sumbit-buttons-main">
+  <button
+    *ngIf="showCancelButton"
+    id="{{cancelId}}"
+    type="submit"
+    class="sumbit-buttons-cancel"
+    click="onCancel()"
+  >
+    {{ cancelButton }}
+  </button>
+  <button
+    *ngIf="showSubmitButton"
+    id="{{submitId}}"
+    type="submit"
+    class="sumbit-buttons-confirm"
+    (click)="onSubmit()"
+  >
+    {{ submitButton }}
+  </button>
+</div>

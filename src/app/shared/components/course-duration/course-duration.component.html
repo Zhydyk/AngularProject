@@ -1,0 +1,19 @@
+<div class="course-duration-container">
+  <label 
+    for="duration"
+    class="course-duration-label"
+  >
+    Duration:<span>* required</span></label
+  >
+  <div class="course-duration">
+    <input
+      id="course-duration-input"
+      type="number"
+      class="course-duration-input"
+      placeholder="minutes"
+      [(ngModel)]="courseDuration"
+      required
+    />
+    <p>{{ courseDuration | duration }}</p>
+  </div>
+</div>

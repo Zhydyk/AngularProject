@@ -1,0 +1,49 @@
+@import 'src/styles/main.scss';
+
+.new-course-forms {
+  &-wrapper {
+    border-radius: 6px;
+    box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
+      0 2px 10px 0 rgba(29, 30, 38, 0.15);
+    height: auto;
+    width: 730px;
+    background: $bgWhiteColor;
+    margin: 20px 0;
+    padding: 20px;
+  }
+
+  &-date-duration {
+    width: 40%;
+  }
+
+  &-authors {
+    width: 50%
+  }
+
+  &-title {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-label {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+  }
+
+  &-input {
+    padding: 7px;
+    border: 1px solid $borderColorLightGrey;
+  }
+
+  &-textarea {
+    padding: 7px;
+    width: 100%;
+    border: 1px solid $borderColorLightGrey;
+  }
+
+  &-submit-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

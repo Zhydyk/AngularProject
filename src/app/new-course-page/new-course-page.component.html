@@ -3,9 +3,12 @@
 </app-header>
 <section class="new-course-page-main">
   <breadcrumbs>
-    <a class="breadcrumbs-text">Courses / <b class="breadcrumbs-bold">New Course</b></a>
+    <span class="breadcrumbs-text"><a routerLink="/courses">Courses /</a><b class="breadcrumbs-bold">{{ course?.title || "New Course" }}</b></span>
   </breadcrumbs>
   <div class="new-course-page-container">
-    <new-course-forms></new-course-forms>
+    <new-course-forms
+      [course]="course"
+    >
+    </new-course-forms>
   </div>
 </section>

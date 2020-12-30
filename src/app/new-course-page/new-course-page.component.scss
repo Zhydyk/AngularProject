@@ -15,3 +15,18 @@
     justify-content: center;
   }
 }
+
+.breadcrumbs-text {
+  display: block;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-right: 7px;
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}

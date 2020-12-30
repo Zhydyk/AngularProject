@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Login } from '../models/login.interface';
 import { AuthenticationService } from '../shared/services/authentication.service';
 
@@ -19,7 +20,7 @@ export class LoginPageComponent implements OnInit{
     return this.loginForm.get('password');
   }
 
-  constructor(private fb: FormBuilder, private authentication: AuthenticationService) {}
+  constructor(private fb: FormBuilder, private authentication: AuthenticationService, private router: Router) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -31,7 +32,7 @@ export class LoginPageComponent implements OnInit{
       password: this.password.value,
     };
     this.authentication.login(userLogin);
-    console.log('Logged in successfully');
+    this.router.navigate(['courses']);
   }
 
   private buildForm(): void {

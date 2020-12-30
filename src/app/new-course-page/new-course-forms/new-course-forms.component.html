@@ -4,8 +4,10 @@
     <input
       class="new-course-forms-input"
       type="text"
+      name="courseTitle"
       id="new-course-forms-title"
       placeholder="Text input"
+      [(ngModel)]="courseValue.title"
       required
     >
   </div>
@@ -18,16 +20,24 @@
       id="new-course-forms-description"
       cols="30"
       rows="10"
+      [(ngModel)]="courseValue.description"
       required
     >
     </textarea>
   </div>
   <div class="new-course-forms-date-duration">
-    <course-duration></course-duration>
-    <course-date></course-date>
+    <course-duration
+      [(courseDuration)]="courseValue.duration"
+    >
+    </course-duration>
+    <course-date
+      [(courseDate)]="courseValue.creationDate"
+    >
+    </course-date>
   </div>
   <div class="new-course-forms-authors">
-    <course-authors></course-authors>
+    <course-authors
+    ></course-authors>
   </div>
   <div class="new-course-forms-submit-buttons">
     <submit-buttons

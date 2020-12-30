@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Courses } from '../models/course.interface';
+import { CoursePageService } from '../shared/services/course-page.service';
 
 @Component({
   selector: 'new-course-page',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-course-page.component.scss']
 })
 export class NewCoursePageComponent implements OnInit {
+  public course: Courses;
+  public courseId: string;
 
-  constructor() { }
+  constructor(
+    private courseService: CoursePageService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.courseId = this.route.snapshot.paramMap.get('id');
+    this.course = {...this.courseService.getItemById(this.courseId)}
   }
 
 }

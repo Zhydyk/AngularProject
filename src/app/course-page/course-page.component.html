@@ -9,6 +9,9 @@
     <div class="course-page-search">
       <course-search (search)="searchElement($event)"> </course-search>
     </div>
+    <div class="course-page-newcourse">
+      <button class="primary-button" routerLink="./new"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add course</button>
+    </div>
     <course-lists
       [courseLists]="filteredCourses"
       (deleteCourse)="onDeleteCourse($event)"

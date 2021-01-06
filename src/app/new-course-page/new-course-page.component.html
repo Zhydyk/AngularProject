@@ -3,11 +3,13 @@
 </app-header>
 <section class="new-course-page-main">
   <breadcrumbs>
-    <span class="breadcrumbs-text"><a routerLink="/courses">Courses /</a><b class="breadcrumbs-bold">{{ course?.title || "New Course" }}</b></span>
+    <span class="breadcrumbs-text"><a routerLink="/courses">Courses /</a><b class="breadcrumbs-bold">{{ (course$ | async)?.name || "New Course" }}</b></span>
   </breadcrumbs>
   <div class="new-course-page-container">
     <new-course-forms
-      [course]="course"
+      [course]="course$ | async"
+      (emitSubmit)="createNewCourse($event)"
+      (emitCancel)="onCancel()"
     >
     </new-course-forms>
   </div>

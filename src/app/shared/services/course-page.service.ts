@@ -1,67 +1,61 @@
+import { NullTemplateVisitor } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpCoursesRequestService } from 'src/app/api/http-course-request/http-courses-request.service';
+import { AmountOfCourses } from 'src/app/models/amount-of-courses.interface';
 import { Courses } from 'src/app/models/course.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursePageService {
-  public courses: Courses[] = [
-    {
-      id: '1',
-      title: 'Mentoring Program 1',
-      creationDate: new Date('2020/12/03'),
-      duration: 60,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-      topRated: true,
-    },
-    {
-      id: '2',
-      title: 'Mentoring Program 2',
-      creationDate: new Date('2020/10/30'),
-      duration: 8,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-    },
-    {
-      id: '3',
-      title: 'Mentoring Program 3',
-      creationDate: new Date('2020/10/01'),
-      duration: 15,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-      topRated: true,
-    },
-    {
-      id: '4',
-      title: 'Mentoring Program 4',
-      creationDate: new Date('2021/08/23'),
-      duration: 500,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-    },
-    {
-      id: '5',
-      title: 'Program 5',
-      creationDate: new Date('2020/10/23'),
-      duration: 59,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-    },
-  ];
+  constructor(private httpCourseService: HttpCoursesRequestService) {}
 
-  public getList(): Courses[] {
-    return this.courses;
+  public getList(): Observable<Courses[]> {
+    const amountOfCourses: AmountOfCourses = {
+      sort: 'date',
+      count: 10,
+    }
+    return this.httpCourseService.getCourses(amountOfCourses);
   }
 
-  public createCourse(course: Courses): void {
-    this.courses.push(course);
+  public getItemById(id: number): Observable<Courses> {
+    return this.httpCourseService.getCourseById(id);
   }
 
-  public getItemById(id: string): Courses {
-    return this.courses.find( course => course.id === id);
+  public deleteCourse(course: Courses): Observable<Courses> {
+    return this.httpCourseService.deleteCourseById(course.id);
   }
 
-  public updateItem(course: Courses): Courses[] {
-    return [...this.courses, course];
+  public getCourseBySearch(searchElement: string): Observable<Courses[]> {
+    const amountOfCourses: AmountOfCourses = {
+      search: searchElement,
+      sort: 'data',
+    }
+
+    return this.httpCourseService.getCourses(amountOfCourses);
   }
 
-  public removeItem(course: Courses): void {
-    this.courses = this.courses.filter(item => item.id !== course.id);
+  public newCourse(course: Partial<Courses>): Observable<Courses> {
+    const formattedCourse = this.formatCourses(course);
+
+    return this.httpCourseService.addNewCourse(formattedCourse);
+  }
+
+  public updateCourse(course: Partial<Courses>): Observable<Courses> {
+    const updateCourse = this.formatCourses(course);
+    return this.httpCourseService.updateCourse(updateCourse);
+  }
+
+  private formatCourses(course: Partial<Courses>): Courses {
+    return {
+      id: course.id || null,
+      name: course.name || null,
+      description: course.description || null,
+      isTopRated: course.isTopRated || false,
+      date: course.date || null,
+      authors: course.authors,
+      length: course.length || null,
+    };
   }
 }

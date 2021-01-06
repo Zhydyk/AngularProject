@@ -1,17 +1,17 @@
 <div class="course-card-container">
   <div class="course-card-header">
     <div class="course-card-header-with-rated">
-      <h1 class="h1">{{ course.title | uppercase }}</h1>
-      <img src="assets/icons/star.svg" alt="img" class="icon star-icon" *ngIf="course.topRated" />
+      <h1 class="h1">{{ course.name | uppercase }}</h1>
+      <img src="assets/icons/star.svg" alt="img" class="icon star-icon" *ngIf="course.isTopRated" />
     </div>
     <section class="course-card-date-time-info">
       <div class="course-card-time-section course-card-section">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        {{ course.duration | duration }}
+        {{ course.length | duration }}
       </div>
       <div class="course-card-date-section course-card-section">
         <i class="fa fa-calendar-o" aria-hidden="true"></i>
-        {{ course?.creationDate | date: 'dd/MM/yyyy'}}
+        {{ course?.date | date: 'dd/MM/yyyy'}}
       </div>
     </section>
   </div>
@@ -22,10 +22,19 @@
         <i class="fa fa-pencil" aria-hidden="true"></i>
         Edit
       </button>
-      <button class="primary-button delete-btn" (click)="deleteCourse()">
+      <button class="primary-button delete-btn" (click)="showDeleteModal()">
         <i class="fa fa-trash" aria-hidden="true"></i>
         Delete
       </button>
     </div>
   </div>
 </div>
+
+<delete-modal
+  [title]="titleModal"
+  [description]="descriptionForModal"
+  [isModalOpen]="showModal"
+  (showDeleteModal)="hideModal()"
+  (submitDeleteModal)="deleteCourse()"
+>
+</delete-modal>

@@ -4,7 +4,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <h1 class="h1">Login</h1>
       <div class="login-page-form-field">
-        <label for="email" class="login-page-form-field-label">
+        <label for="login" class="login-page-form-field-label">
           Email:
           <span class="login-page-form-field-required">
             * required
@@ -12,10 +12,10 @@
         </label>
         <input
           type="text"
-          id="email"
+          id="login"
           class="login-page-form-field-input"
           placeholder="Enter e-mail"
-          formControlName="email"
+          formControlName="login"
         >
       </div>
       <div class="login-page-form-field">

@@ -1,8 +1,8 @@
 <div *ngIf="courseLists; else noDataAboutCourseList">
   <course-card
     *ngFor="let course of courseLists | orderBy"
-    [coursePlate]="course?.creationDate"
-    [ngClass]="{topCourse: course?.topRated}"
+    [coursePlate]="course?.date"
+    [ngClass]="{topCourse: course?.isTopRated}"
     [course]="course"
     (delete)="onDeleteCourse($event)"
   >

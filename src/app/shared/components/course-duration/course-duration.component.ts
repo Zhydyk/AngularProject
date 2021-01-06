@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
@@ -9,4 +10,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class CourseDurationComponent {
   @Input()
   public courseDuration: number;
+
+  @Output() courseDurationChange = new EventEmitter<number>();
+
+  onDurationChange(model: number): void {
+    this.courseDurationChange.emit(model);
+  }
 }

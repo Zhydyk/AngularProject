@@ -21,7 +21,7 @@ export class CourseCardComponent {
   public delete: EventEmitter<Courses> = new EventEmitter<Courses>();
   
   @Output()
-  public edit: EventEmitter<number> = new EventEmitter<number>();
+  public edit: EventEmitter<string> = new EventEmitter<string>();
 
   public deleteCourse(): void {
     this.delete.emit(this.course);

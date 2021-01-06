@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Courses } from 'src/app/models/course.interface';
 
 @Component({
   selector: 'new-course-forms',
@@ -6,4 +7,22 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./new-course-forms.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewCourseFormsComponent {}
+export class NewCourseFormsComponent {
+  public courseValue: Partial<Courses> = {};
+
+  @Input()
+  public course: Courses;
+
+  @Output()
+  public emitCancel: EventEmitter<void> = new EventEmitter<void>();
+
+  public ngOnInit() {
+    if (this.course) {
+      this.courseValue = this.course;
+    }
+  }
+
+  public onCancel(): void {
+    this.emitCancel.emit();
+  }
+}

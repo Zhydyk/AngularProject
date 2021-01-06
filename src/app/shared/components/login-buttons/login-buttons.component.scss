@@ -13,4 +13,8 @@
   font-size: 14px;
   border: 0;
   background: none;
+  
+  &:first-child {
+    margin-right: 7px;
+  }
 }

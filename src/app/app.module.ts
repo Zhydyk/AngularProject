@@ -10,6 +10,7 @@ import { NewCoursePageModule } from './new-course-page/new-course-page.module';
 import { FooterModule } from './shared/components/footer/footer.module';
 import { HeaderModule } from './shared/components/header/header.module';
 import { NewCourseFormsModule } from './new-course-page/new-course-forms/new-course-forms.module';
+import { PageNotFoundModule } from './page-not-found/page-not-found.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NewCourseFormsModule } from './new-course-page/new-course-forms/new-cou
     FooterModule,
     HeaderModule,
     NewCourseFormsModule,
+    PageNotFoundModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,6 +12,7 @@ import { FooterModule } from './shared/components/footer/footer.module';
 import { HeaderModule } from './shared/components/header/header.module';
 import { NewCourseFormsModule } from './new-course-page/new-course-forms/new-course-forms.module';
 import { PageNotFoundModule } from './page-not-found/page-not-found.module';
+import { SpinnerModule } from './shared/components/spinner/spinner.module';
  
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PageNotFoundModule } from './page-not-found/page-not-found.module';
     NewCourseFormsModule,
     PageNotFoundModule,
     HttpClientModule,
+    SpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

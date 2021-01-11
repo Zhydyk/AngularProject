@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { delay, finalize } from 'rxjs/operators';
 import { Courses } from '../models/course.interface';
 import { CoursePageService } from '../shared/services/course-page.service';
 
@@ -11,27 +12,43 @@ import { CoursePageService } from '../shared/services/course-page.service';
 export class CoursePageComponent implements OnInit {
   public filterCourse: string;
   public courses$: Observable<Courses[]>;
+  public isLoading = false;
 
   constructor(private coursePageService: CoursePageService) {}
 
   public ngOnInit(): void {
-    this.courses$ = this.coursePageService.getList();
-    
+    this.isLoading = true;
+    this.courses$ = this.coursePageService
+      .getList()
+      .pipe(finalize(() => (this.isLoading = false)));
   }
 
   public searchElement(searchCourse: string) {
     this.filterCourse = searchCourse;
-    this.courses$ = this.coursePageService.getCourseBySearch(searchCourse);
+    if (!searchCourse) {
+      this.isLoading = true;
+      this.courses$ = this.coursePageService.getList().pipe(delay(500), finalize(() => (this.isLoading = false)));
+    } else if (searchCourse.length >= 3) {
+      this.isLoading = true;
+      this.courses$ = this.coursePageService.getCourseBySearch(searchCourse).pipe(delay(500), finalize(() => (this.isLoading = false)));
+    }
   }
 
   public onDeleteCourse(course: Courses): void {
-    this.coursePageService.deleteCourse(course).subscribe(
-      () => {
-        this.courses$ = this.filterCourse 
-          ? this.coursePageService.getCourseBySearch(this.filterCourse) 
-          : this.coursePageService.getList();
-      },
-      (err) => console.error(err),
-    )
+    this.isLoading = true;
+    this.coursePageService
+      .deleteCourse(course).pipe(delay(500), finalize(() => (this.isLoading = false)))
+      .subscribe(
+        () => {
+          this.courses$ = this.filterCourse
+            ? this.coursePageService.getCourseBySearch(this.filterCourse)
+            : this.coursePageService.getList();
+        },
+        (err) => console.error(err)
+      );
+  }
+
+  public onLoadMoreCourses(): void {
+    this.courses$ = this.coursePageService.getLoadMoreCourses();
   }
 }

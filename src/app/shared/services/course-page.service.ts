@@ -1,4 +1,3 @@
-import { NullTemplateVisitor } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpCoursesRequestService } from 'src/app/api/http-course-request/http-courses-request.service';
@@ -9,12 +8,14 @@ import { Courses } from 'src/app/models/course.interface';
   providedIn: 'root'
 })
 export class CoursePageService {
+  public countOfCourse = 3;
+
   constructor(private httpCourseService: HttpCoursesRequestService) {}
 
   public getList(): Observable<Courses[]> {
     const amountOfCourses: AmountOfCourses = {
       sort: 'date',
-      count: 10,
+      count: this.countOfCourse,
     }
     return this.httpCourseService.getCourses(amountOfCourses);
   }
@@ -30,7 +31,7 @@ export class CoursePageService {
   public getCourseBySearch(searchElement: string): Observable<Courses[]> {
     const amountOfCourses: AmountOfCourses = {
       search: searchElement,
-      sort: 'data',
+      sort: 'date',
     }
 
     return this.httpCourseService.getCourses(amountOfCourses);
@@ -45,6 +46,16 @@ export class CoursePageService {
   public updateCourse(course: Partial<Courses>): Observable<Courses> {
     const updateCourse = this.formatCourses(course);
     return this.httpCourseService.updateCourse(updateCourse);
+  }
+
+  public getLoadMoreCourses(): Observable<Courses[]> {
+    this.countOfCourse += 3;
+    const loadMoreCorses: AmountOfCourses = {
+      count: this.countOfCourse,
+      sort: 'date',
+    }
+
+    return this.httpCourseService.getCourses(loadMoreCorses);
   }
 
   private formatCourses(course: Partial<Courses>): Courses {

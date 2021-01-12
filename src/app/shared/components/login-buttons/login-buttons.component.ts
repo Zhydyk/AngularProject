@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserInfo } from 'src/app/models/user-info.interface';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -9,10 +10,13 @@ import { AuthenticationService } from '../../services/authentication.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginButtonsComponent {
+  public userInfo: UserInfo = this.authenticationService.getUserInfo();
+
   constructor(
     private router: Router,
-    public authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService
   ) {}
+
   public onLogout() {
     this.authenticationService.logout();
     this.router.navigate(['login']);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { Login } from '../models/login.interface';
 import { AuthenticationService } from '../shared/services/authentication.service';
 
@@ -14,8 +16,9 @@ import { AuthenticationService } from '../shared/services/authentication.service
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
+  public subscription: Subscription;
 
   get login(): AbstractControl {
     return this.loginForm.get('login');
@@ -40,7 +43,7 @@ export class LoginPageComponent implements OnInit {
       login: this.login.value,
       password: this.password.value,
     };
-    this.authenticationService
+    this.subscription = this.authenticationService
       .login(userLogin)
       .subscribe(
         () => this.router.navigate(['courses']),
@@ -59,5 +62,9 @@ export class LoginPageComponent implements OnInit {
       ],
       password: ['', { validators: [Validators.required] }],
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

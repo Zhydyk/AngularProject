@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { delay, finalize } from 'rxjs/operators';
+import { interval, Observable, Subscription } from 'rxjs';
+import { debounce, debounceTime, finalize } from 'rxjs/operators';
 import { Courses } from '../models/course.interface';
 import { CoursePageService } from '../shared/services/course-page.service';
 
@@ -13,6 +13,7 @@ export class CoursePageComponent implements OnInit {
   public filterCourse: string;
   public courses$: Observable<Courses[]>;
   public isLoading = false;
+  public subscription: Subscription = new Subscription();
 
   constructor(private coursePageService: CoursePageService) {}
 
@@ -25,30 +26,45 @@ export class CoursePageComponent implements OnInit {
 
   public searchElement(searchCourse: string) {
     this.filterCourse = searchCourse;
-    if (!searchCourse) {
+
+    if (searchCourse.length >= 3) {
       this.isLoading = true;
-      this.courses$ = this.coursePageService.getList().pipe(delay(500), finalize(() => (this.isLoading = false)));
-    } else if (searchCourse.length >= 3) {
-      this.isLoading = true;
-      this.courses$ = this.coursePageService.getCourseBySearch(searchCourse).pipe(delay(500), finalize(() => (this.isLoading = false)));
+      this.subscription = this.coursePageService
+        .getCourseBySearch(searchCourse)
+        .pipe(
+          debounce(() => interval(1000)),
+          finalize(() => (this.isLoading = false))
+        )
+        .subscribe(() => {
+          this.courses$ = this.coursePageService.getCourseBySearch(
+            this.filterCourse
+          );
+        });
+    } else if (!searchCourse) {
+      this.subscription = this.coursePageService
+        .getCourseBySearch(searchCourse)
+        .subscribe(() => {
+          this.courses$ = this.coursePageService.getList();
+        });
     }
   }
 
   public onDeleteCourse(course: Courses): void {
     this.isLoading = true;
-    this.coursePageService
-      .deleteCourse(course).pipe(delay(500), finalize(() => (this.isLoading = false)))
+    this.subscription = this.coursePageService
+      .deleteCourse(course)
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe(
-        () => {
-          this.courses$ = this.filterCourse
-            ? this.coursePageService.getCourseBySearch(this.filterCourse)
-            : this.coursePageService.getList();
-        },
+        () => (this.courses$ = this.coursePageService.getList()),
         (err) => console.error(err)
       );
   }
 
   public onLoadMoreCourses(): void {
     this.courses$ = this.coursePageService.getLoadMoreCourses();
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

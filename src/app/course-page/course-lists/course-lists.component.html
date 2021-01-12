@@ -1,4 +1,4 @@
-<div *ngIf="courseLists; else noDataAboutCourseList">
+<div *ngIf="courseLists?.length; else noDataAboutCourseList">
   <course-card
     *ngFor="let course of courseLists; trackBy: trackByFunc"
     [coursePlate]="course?.date"
@@ -7,7 +7,7 @@
     (delete)="onDeleteCourse($event)"
   >
   </course-card>
-  <!-- <div class="course-lists-load-more"><a (click)="onLoadMore()">Load more...</a></div> -->
+  <div class="course-lists-load-more"><a (click)="onLoadMore()">Load more...</a></div>
 </div>
 
 <ng-template #noDataAboutCourseList>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, Observable, Subscription } from 'rxjs';
-import { debounce, debounceTime, finalize, switchMap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { finalize, switchMap } from 'rxjs/operators';
 import { Courses } from '../models/course.interface';
 import { CoursePageService } from '../shared/services/course-page.service';
 

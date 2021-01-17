@@ -16,6 +16,7 @@ export class AuthenticationService {
   public login(value: Login): Observable<UserInfo> {
     return this.httpAuthService.getAuthToken(value).pipe(
       switchMap((token: Token) => {
+        console.log(token);
         return this.httpAuthService.getUserInfo(token)
       }),
       tap((value: UserInfo) => {

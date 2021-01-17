@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { UserInfo } from 'src/app/models/user-info.interface';
 import { AuthenticationService } from '../../services/authentication.service';
+import * as fromAuthAction from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'login-buttons',
@@ -13,12 +14,11 @@ export class LoginButtonsComponent {
   public userInfo: UserInfo = this.authenticationService.getUserInfo();
 
   constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private store: Store
   ) {}
 
   public onLogout() {
-    this.authenticationService.logout();
-    this.router.navigate(['login']);
+    this.store.dispatch(fromAuthAction.logOut());
   }
 }

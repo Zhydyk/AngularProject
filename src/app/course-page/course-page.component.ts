@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, switchMap } from 'rxjs/operators';
 import { Courses } from '../models/course.interface';
 import { CoursePageService } from '../shared/services/course-page.service';
+import * as fromCourseAction from 'src/app/store/actions/course.action';
+import { selectCourses } from '../store/selectors/course.selector';
 
 @Component({
   selector: 'course-page',
@@ -13,46 +16,31 @@ export class CoursePageComponent implements OnInit {
   public filterCourse: string;
   public courses$: Observable<Courses[]>;
   public isLoading = false;
-  public subscription: Subscription = new Subscription();
 
-  constructor(private coursePageService: CoursePageService) {}
+  constructor(
+    private store: Store
+  ) {}
 
   public ngOnInit(): void {
-    this.isLoading = true;
-    this.courses$ = this.coursePageService
-      .getList()
-      .pipe(finalize(() => (this.isLoading = false)));
+    this.courses$ = this.store.pipe(select(selectCourses));
+    this.store.dispatch(fromCourseAction.getCourses());
   }
 
-  public searchElement(searchCourse: string) {
-    this.filterCourse = searchCourse;
+  public searchElement(searchElement: string) {
+    this.filterCourse = searchElement;
 
-    if (searchCourse) {
-      this.isLoading = true;
-      this.courses$ = this.coursePageService
-        .getCourseBySearch(this.filterCourse)
-        .pipe(finalize(() => (this.isLoading = false)));
+    if (searchElement) {
+      this.store.dispatch(fromCourseAction.searchCourse({ searchElement }));
     } else {
-      this.isLoading = true;
-      this.courses$ = this.coursePageService
-        .getList()
-        .pipe(finalize(() => (this.isLoading = false)));
+      this.store.dispatch(fromCourseAction.getCourses());
     }
   }
 
   public onDeleteCourse(course: Courses): void {
-    this.isLoading = true;
-    this.courses$ = this.coursePageService.deleteCourse(course).pipe(
-      switchMap(() => this.coursePageService.getList()),
-      finalize(() => (this.isLoading = false))
-    );
+    this.store.dispatch(fromCourseAction.deleteCourse({ course }));
   }
 
   public onLoadMoreCourses(): void {
-    this.courses$ = this.coursePageService.getLoadMoreCourses();
-  }
-
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.store.dispatch(fromCourseAction.getLoadMore());
   }
 }

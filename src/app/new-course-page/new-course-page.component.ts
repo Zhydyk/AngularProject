@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Courses } from '../models/course.interface';
 import { CoursePageService } from '../shared/services/course-page.service';
+import * as fromCourseAction from 'src/app/store/actions/course.action';
 
 @Component({
   selector: 'new-course-page',
@@ -18,6 +20,7 @@ export class NewCoursePageComponent implements OnInit {
   constructor(
     private courseService: CoursePageService,
     private route: ActivatedRoute,
+    private store: Store,
     private router: Router
   ) {}
 
@@ -33,20 +36,9 @@ export class NewCoursePageComponent implements OnInit {
 
   public createNewCourse(course: Partial<Courses>): void {
     if (this.course$) {
-      console.log('update course');
-      this.courseService.updateCourse(course).subscribe(
-        () => this.courseService.getList(),
-        (err) => console.error(err)
-      );
+     this.store.dispatch(fromCourseAction.editCourse({course}))
     } else {
-      console.log('new course');
-      this.courseService
-        .newCourse(course)
-        .pipe(finalize(() => (this.isLoading = false)))
-        .subscribe(
-          () => this.courseService.getList(),
-          (err) => console.log(err)
-        );
+      this.store.dispatch(fromCourseAction.addCourse({course}))
     }
 
     this.router.navigate(['courses']);

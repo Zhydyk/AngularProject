@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { AuthEffects } from './store/effects/auth.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/app.states';
+import { RootStoreModule } from './store/root-store.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,20 +36,7 @@ import { reducers } from './store/app.states';
     PageNotFoundModule,
     HttpClientModule,
     SpinnerModule,
-    StoreModule.forRoot(
-      reducers,
-      {
-        runtimeChecks: {
-          strictStateImmutability: true,
-          strictActionImmutability: true,
-        },
-      }
-    ),
-    EffectsModule.forRoot([AuthEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production,
-    }),
+    RootStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent],

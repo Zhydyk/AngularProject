@@ -1,48 +1,59 @@
+import { Action, createReducer, on } from '@ngrx/store';
+import { CONSTANTS } from 'src/app/constants/constants';
 import { Login } from 'src/app/models/login.interface';
+import * as fromAuthActions from '../actions/auth.actions';
 
-export interface State {
+export interface AuthState {
   isAuthenticated: boolean;
-  user: Login | null;
+  userInfo: Login | null;
   errorMessage: string | null;
 };
 
-export const initialState: State = {
+export const initialState: AuthState = {
   isAuthenticated: false,
-  user: null,
+  userInfo: null,
   errorMessage: null
 };
 
 
-export function authReducer(state = initialState, action): State {
-  switch (action.type) {
-    case '[Login Page Component] Load Login Success': {
-      console.log(action)
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: {
-          login: action.payload.login,
-          password: action.payload.password,
-        },
-        errorMessage: null,
-      }
+
+const reducer = createReducer(
+  initialState,
+  on(fromAuthActions.login, (state) => {
+    console.log('login');
+    return {
+      ...state,
+    };
+  }),
+  on(fromAuthActions.loadLoginSuccess, (state, { userLogin }) => {
+    console.log('login success');
+    return {
+      ...state,
+      isAuthenticated: true,
+      userInfo: userLogin,
+      errorMessage: null,
+    };
+  }),
+  on(fromAuthActions.logOut, state => {
+    console.log('Log out success');
+    window.localStorage.removeItem(CONSTANTS.authKey)
+    return {
+      ...state,
+      user: null,
+      isAuthenticated: false
     }
-    case '[Login Page Component] Load Login Failure': {
-      return {
-        ...state,
-        errorMessage: 'Incorrect email or password. Please try again',
-      }
+  }),
+  on(fromAuthActions.loadLoginFailure, state => {
+    console.log('Error');
+    return {
+      ...state,
+      user: null,
+      isAuthenticated: false,
+      errorMessage: `Something went wrong, Please try to enter your email or password again`,
     }
-    case '[Login Page Component] Log Out': {
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-        errorMessage: null,
-      }
-    }
-    default: {
-      return state;
-    }
-  }
+  })
+);
+
+export function authReducer(state = initialState, action: Action): AuthState {
+  return reducer(state, action);
 }

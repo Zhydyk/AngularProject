@@ -8,7 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Login } from '../models/login.interface';
-import { LoginState } from '../store/app.states';
+import { AppState } from '../store/app.states';
 import * as fromAction from '../store/actions/auth.actions';
 
 @Component({
@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<LoginState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {

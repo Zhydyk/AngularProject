@@ -8,12 +8,12 @@ export const login = createAction(
 
 export const loadLoginSuccess = createAction(
   '[Login Page Component] Load Login Success',
-  props<{ payload: Login }>()
+  props<{ userLogin: Login }>()
 );
 
 export const loadLoginFailure = createAction(
   '[Login Page Component] Load Login Failure',
-  props<{ error: any }>()
+  props<{ error: Error | null }>()
 );
 
 export const logOut = createAction(

@@ -9,8 +9,8 @@ export class OrderByPipe implements PipeTransform {
   transform(course: Courses[]): Courses[] {
     const courseArr = [...course];
     return courseArr.sort((currentElement, previousElement) => {
-      const dataA = +new Date(currentElement.creationDate);
-      const dataB = +new Date(previousElement.creationDate);
+      const dataA = +new Date(currentElement.date);
+      const dataB = +new Date(previousElement.date);
       return dataA - dataB;
     });
   }

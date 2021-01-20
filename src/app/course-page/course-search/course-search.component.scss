@@ -1,4 +1,4 @@
-@import "../../../styles/main.scss";
+@import 'src/styles/main.scss';
 
 .course-search {
   &-container {
@@ -15,17 +15,4 @@
   border-style: solid;
   margin-right: 15px;
   padding: 8px;
-}
-
-.search-button {
-  border-radius: 3px;
-  background: $bgGreenBtnColor;
-  padding: 1px 15px;
-  border: 0;
-  color: map-get($app-primary-text, whiteColor);
-  line-height: 30px;
-  letter-spacing: -0.08px;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 7px 0;
 }

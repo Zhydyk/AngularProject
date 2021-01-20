@@ -10,21 +10,17 @@
       <course-search (search)="searchElement($event)"> </course-search>
     </div>
     <div class="course-page-newcourse">
-      <button class="primary-button" routerLink="./new"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add course</button>
+      <button class="primary-button" routerLink="./new">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>Add course
+      </button>
     </div>
     <course-lists
-      [courseLists]="filteredCourses"
+      [courseLists]="courses$ | async"
       (deleteCourse)="onDeleteCourse($event)"
+      (loadMore)="onLoadMoreCourses()"
     >
     </course-lists>
   </div>
 </div>
 
-<delete-modal
-  [title]="titleModal"
-  [description]="descriptionForModal"
-  [isModalOpen]="showModal"
-  (showDeleteModal)="hideModal()"
-  (showDeleteModal)="confirmDelete()"
->
-</delete-modal>
+<spinner *ngIf="isLoading"></spinner>

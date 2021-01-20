@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Courses } from 'src/app/models/course.interface';
 
 @Component({
   selector: 'delete-modal',
@@ -18,12 +19,15 @@ export class DeleteModalComponent {
 
   @Output()
   public showDeleteModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  
+  @Output()
+  public submitDeleteModal: EventEmitter<Courses> = new EventEmitter<Courses>();
 
   public onCloseDeleteModal(): void {
     this.showDeleteModal.emit();
   }
 
   public onSubmitDeleteModal(): void {
-    this.showDeleteModal.emit();
+    this.submitDeleteModal.emit();
   }
 }

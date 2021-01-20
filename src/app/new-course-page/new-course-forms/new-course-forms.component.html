@@ -7,12 +7,12 @@
       name="courseTitle"
       id="new-course-forms-title"
       placeholder="Text input"
-      [(ngModel)]="courseValue.title"
+      [(ngModel)]="courseValue.name"
       required
     >
   </div>
   <div class="new-course-forms-description">
-    <label for="title" class="new-course-forms-label">Description:<span>* required</span></label>
+    <label for="description" class="new-course-forms-label">Description:<span>* required</span></label>
     <textarea
       class="new-course-forms-textarea"
       name="description"
@@ -27,11 +27,11 @@
   </div>
   <div class="new-course-forms-date-duration">
     <course-duration
-      [(courseDuration)]="courseValue.duration"
+      [(courseDuration)]="courseValue.length"
     >
     </course-duration>
     <course-date
-      [(courseDate)]="courseValue.creationDate"
+      [(courseDate)]="courseValue.date"
     >
     </course-date>
   </div>
@@ -43,6 +43,8 @@
     <submit-buttons
       cancelButton="Cancel"
       submitButton="Submit"
+      (cancel)="onCancel()"
+      (submit)="onSubmit()"
     >
     </submit-buttons>
   </div>

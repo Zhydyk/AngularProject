@@ -1,12 +1,21 @@
-@import 'src/styles/main.scss';
+@import "src/styles/main.scss";
 
-.course-lists {  
+.course-lists {
   &-no-data {
     padding: 15px;
     background-color: $bgWhiteColor;
     text-align: center;
     border: 1px solid $borderColorLightGrey;
     margin: 10px 0;
+  }
+
+  &-load-more {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    margin: 15px 0;
+    height: 40px;
+    background-color: $bgWhiteColor;
   }
 }
 

@@ -6,7 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -20,12 +21,17 @@ export class AuthenticationGuard implements CanActivate {
   public canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    const navigate = this.router.parseUrl("/login");
-    return this.authenticationService.isAuthenticated() ? true : navigate;
+  ): Observable<boolean> {
+    return this.authenticationService.isAuthenticated().pipe(
+      map((res) => {
+        if (res) {
+          return true;
+        }
+    }),
+      catchError(() => {
+        this.router.navigate(['/login']);
+        return of(false);
+      })
+    );
   }
 }

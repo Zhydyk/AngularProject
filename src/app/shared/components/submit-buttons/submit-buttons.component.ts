@@ -26,13 +26,16 @@ export class SubmitButtonsComponent {
   public showCancelButton = true;
 
   @Output()
-  public confirmValue: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public submit: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output()
+  public cancel: EventEmitter<void> = new EventEmitter<void>();
 
   public onSubmit(): void {
-    this.confirmValue.emit();
+    this.submit.emit();
   }
 
   public onCancel(): void {
-    this.confirmValue.emit();
+    this.cancel.emit();
   }
 }

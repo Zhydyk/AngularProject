@@ -1,47 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { finalize, switchMap } from 'rxjs/operators';
 import { Courses } from '../models/course.interface';
-import { FilterPipe } from '../shared/pipes/filter/filter.pipe';
 import { CoursePageService } from '../shared/services/course-page.service';
+import * as fromCourseAction from 'src/app/store/actions/course.action';
+import { selectCourses } from '../store/selectors/course.selector';
 
 @Component({
   selector: 'course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss'],
 })
-export class CoursePageComponent {
-  public filterCourse: Courses[];
-  public descriptionForModal: string;
-  public titleModal = 'Delete course?';
-  public showModal = false;
-  public course: Courses;
+export class CoursePageComponent implements OnInit {
+  public filterCourse: string;
+  public courses$: Observable<Courses[]>;
+  public isLoading = false;
 
-  constructor(private filterPipe: FilterPipe, private coursePageService: CoursePageService) {}
+  constructor(
+    private store: Store
+  ) {}
 
-  get courses() {
-    return this.coursePageService.getList();
+  public ngOnInit(): void {
+    this.courses$ = this.store.pipe(select(selectCourses));
+    this.store.dispatch(fromCourseAction.getCourses());
   }
 
-  get filteredCourses() {
-    return this.filterCourse ? this.filterCourse : this.courses;
+  public searchElement(searchElement: string) {
+    this.filterCourse = searchElement;
+
+    if (searchElement) {
+      this.store.dispatch(fromCourseAction.searchCourse({ searchElement }));
+    } else {
+      this.store.dispatch(fromCourseAction.getCourses());
+    }
   }
 
-  public searchElement(searchCourse: string): void {
-    this.filterCourse = this.filterPipe.transform(this.courses, searchCourse);
+  public onDeleteCourse(course: Courses): void {
+    this.store.dispatch(fromCourseAction.deleteCourse({ course }));
   }
 
-  public hideModal() {
-    this.showModal = false;
-  }
-
-  public confirmDelete() {
-    this.showModal = false;
-    this.coursePageService.removeItem(this.course);
-  }
-
-  public onDeleteCourse(course: Courses) {
-    this.descriptionForModal = `Are you sure you want to delete`
-    + ` ${course.title}`;
-    this.showModal = true;
-    this.course = course;
+  public onLoadMoreCourses(): void {
+    this.store.dispatch(fromCourseAction.getLoadMore());
   }
 }

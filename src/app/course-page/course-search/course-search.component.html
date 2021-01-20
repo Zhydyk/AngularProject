@@ -1,2 +1,1 @@
-<input type="text" class="search-input" placeholder="Type to search" [(ngModel)]="courseSearch" />
-<button class="search-button" (click)="searchCourse(courseSearch)">Search</button>
+<input type="text" class="search-input" placeholder="Type to search" [(ngModel)]="courseSearch" (keyup)="searchCourse()"/>

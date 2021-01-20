@@ -5,13 +5,13 @@ import { Login } from 'src/app/models/login.interface';
 import { UserInfo } from 'src/app/models/user-info.interface';
 import { switchMap, tap } from 'rxjs/operators';
 import { Token } from 'src/app/models/token.interface';
+import { CONSTANTS } from 'src/app/constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   constructor(private httpAuthService: HttpAuthRequestService) {}
-  private authKey = 'Auth_Key';
 
   public login(value: Login): Observable<UserInfo> {
     return this.httpAuthService.getAuthToken(value).pipe(
@@ -19,12 +19,12 @@ export class AuthenticationService {
         return this.httpAuthService.getUserInfo(token)
       }),
       tap((value: UserInfo) => {
-        return window.localStorage.setItem(this.authKey, JSON.stringify(value))
+        return window.localStorage.setItem(CONSTANTS.authKey, JSON.stringify(value))
       })
     );
   }
 
-  public logout(key: string = this.authKey): void {
+  public logout(key: string = CONSTANTS.authKey): void {
     window.localStorage.removeItem(key);
   }
 
@@ -33,7 +33,7 @@ export class AuthenticationService {
     return of(auth);
   }
 
-  public getUserInfo(key: string = this.authKey): UserInfo {
+  public getUserInfo(key: string = CONSTANTS.authKey): UserInfo {
     return JSON.parse(window.localStorage.getItem(key));
   }
 }

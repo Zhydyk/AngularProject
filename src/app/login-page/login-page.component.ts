@@ -1,22 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
 import { Login } from '../models/login.interface';
-import { AuthenticationService } from '../shared/services/authentication.service';
+import { AppState } from '../store/app.states';
+import * as fromAction from '../store/actions/auth.actions';
 
 @Component({
   selector: 'login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit, OnDestroy {
+export class LoginPageComponent implements OnInit {
   public loginForm: FormGroup;
   public subscription: Subscription;
 
@@ -30,8 +30,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
-    private router: Router
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -43,12 +42,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       login: this.login.value,
       password: this.password.value,
     };
-    this.subscription = this.authenticationService
-      .login(userLogin)
-      .subscribe(
-        () => this.router.navigate(['courses']),
-        (err) => console.error(err)
-      );
+    this.store.dispatch(fromAction.login({userLogin}));
   }
 
   private buildForm(): void {
@@ -62,9 +56,5 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       ],
       password: ['', { validators: [Validators.required] }],
     });
-  }
-
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

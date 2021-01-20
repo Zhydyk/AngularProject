@@ -1,12 +1,13 @@
-<div *ngIf="courseLists; else noDataAboutCourseList">
+<div *ngIf="courseLists?.length; else noDataAboutCourseList">
   <course-card
-    *ngFor="let course of courseLists | orderBy"
+    *ngFor="let course of courseLists; trackBy: trackByFunc"
     [coursePlate]="course?.date"
     [ngClass]="{topCourse: course?.isTopRated}"
     [course]="course"
     (delete)="onDeleteCourse($event)"
   >
   </course-card>
+  <div class="course-lists-load-more"><a (click)="onLoadMore()">Load more...</a></div>
 </div>
 
 <ng-template #noDataAboutCourseList>

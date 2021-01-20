@@ -5,9 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { Login } from '../models/login.interface';
-import { AuthenticationService } from '../shared/services/authentication.service';
+import { AppState } from '../store/app.states';
+import * as fromAction from '../store/actions/auth.actions';
 
 @Component({
   selector: 'login-page',
@@ -16,6 +18,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
 })
 export class LoginPageComponent implements OnInit {
   public loginForm: FormGroup;
+  public subscription: Subscription;
 
   get login(): AbstractControl {
     return this.loginForm.get('login');
@@ -27,8 +30,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
-    private router: Router
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -40,12 +42,7 @@ export class LoginPageComponent implements OnInit {
       login: this.login.value,
       password: this.password.value,
     };
-    this.authenticationService
-      .login(userLogin)
-      .subscribe(
-        () => this.router.navigate(['courses']),
-        (err) => console.error(err)
-      );
+    this.store.dispatch(fromAction.login({userLogin}));
   }
 
   private buildForm(): void {

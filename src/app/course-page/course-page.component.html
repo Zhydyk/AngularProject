@@ -17,7 +17,10 @@
     <course-lists
       [courseLists]="courses$ | async"
       (deleteCourse)="onDeleteCourse($event)"
+      (loadMore)="onLoadMoreCourses()"
     >
     </course-lists>
   </div>
 </div>
+
+<spinner *ngIf="isLoading"></spinner>

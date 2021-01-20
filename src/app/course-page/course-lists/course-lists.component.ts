@@ -13,7 +13,18 @@ export class CourseListsComponent {
   @Output()
   public deleteCourse = new EventEmitter<Courses>();
 
+  @Output()
+  public loadMore = new EventEmitter<void>();
+
   public onDeleteCourse(course: Courses): void {
     this.deleteCourse.emit(course);
+  }
+
+  public onLoadMore(): void {
+    this.loadMore.emit();
+  }
+
+  public trackByFunc(index: number, course: Courses): number {
+    return course.id;
   }
 }

@@ -43,7 +43,7 @@ export class CourseAuthorsComponent implements ControlValueAccessor, OnInit {
   }
 
   // @Input()
-  // public authors: AuthorList[];
+  public authorsList: AuthorList[] = [];
 
   constructor(private fb: FormBuilder) {}
 
@@ -60,8 +60,10 @@ export class CourseAuthorsComponent implements ControlValueAccessor, OnInit {
   public writeValue(value: AuthorList[]) {
     console.log(value);
     if (!value) {
-      return;
+      return [];
     }
+
+    this.authorsList = [...value];
     // this.authors = value;
     // this.formControl.setValue(value, { emitEvent: false, onlySelf: true });
   }

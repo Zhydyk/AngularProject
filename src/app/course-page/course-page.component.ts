@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { finalize, switchMap } from 'rxjs/operators';
-import { Courses } from '../models/course.interface';
-import { CoursePageService } from '../shared/services/course-page.service';
+import { Observable } from 'rxjs';
+import { AuthorList, Courses } from '../models/course.interface';
 import * as fromCourseAction from 'src/app/store/actions/course.action';
+import * as fromAuthorAction from 'src/app/store/actions/author.actions';
 import { selectCourses } from '../store/selectors/course.selector';
+import { selectAuthor } from '../store/selectors/author.selectors';
 
 @Component({
   selector: 'course-page',
@@ -24,6 +24,7 @@ export class CoursePageComponent implements OnInit {
   public ngOnInit(): void {
     this.courses$ = this.store.pipe(select(selectCourses));
     this.store.dispatch(fromCourseAction.getCourses());
+
   }
 
   public searchElement(searchElement: string) {

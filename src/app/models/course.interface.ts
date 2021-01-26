@@ -4,12 +4,17 @@ export interface Courses {
   description: string;
   isTopRated?: boolean;
   date: Date;
-  authors: CourseAuthors[];
+  authors: AuthorOption[];
   length: number;
 }
 
-export interface CourseAuthors {
+export interface AuthorOption {
   id: number;
   name: string;
-  lastName: string;
+  lastName?: string;
+}
+
+export interface AuthorList {
+  id: string;
+  name: string;
 }

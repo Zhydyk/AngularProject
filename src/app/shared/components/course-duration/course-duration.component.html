@@ -11,10 +11,9 @@
       type="number"
       class="course-duration-input"
       placeholder="minutes"
-      [ngModel]="courseDuration"
-      (ngModelChange)="onDurationChange($event)"
+      [formControl]="formControl"
       required
     />
-    <p>{{ courseDuration | duration }}</p>
+    <p>{{ formControl.value | duration }}</p>
   </div>
 </div>

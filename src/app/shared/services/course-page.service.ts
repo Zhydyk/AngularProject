@@ -15,7 +15,7 @@ export class CoursePageService {
   public getList(): Observable<Courses[]> {
     const amountOfCourses: AmountOfCourses = {
       sort: 'date',
-      count: this.countOfCourse,
+      count: `${this.countOfCourse}`,
     }
     return this.httpCourseService.getCourses(amountOfCourses);
   }
@@ -30,7 +30,7 @@ export class CoursePageService {
 
   public getCourseBySearch(searchElement: string): Observable<Courses[]> {
     const amountOfCourses: AmountOfCourses = {
-      search: searchElement,
+      textFragment: searchElement,
       sort: 'date',
     }
 
@@ -51,7 +51,7 @@ export class CoursePageService {
   public getLoadMoreCourses(): Observable<Courses[]> {
     this.countOfCourse += 3;
     const loadMoreCorses: AmountOfCourses = {
-      count: this.countOfCourse,
+      count: `${this.countOfCourse}`,
       sort: 'date',
     }
 

@@ -1,4 +1,4 @@
-@import 'src/styles/main.scss';
+@import "src/styles/main.scss";
 
 .course-authors {
   &-container {
@@ -16,4 +16,31 @@
     padding: 7px;
     border: 1px solid $borderColorLightGrey;
   }
+}
+
+.chip-main {
+  display: flex;
+}
+
+.chip {
+  min-width: 20%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  background-color: #e5e5e5;
+  padding: 7px 14px;
+  margin: 3px 4px;
+  font-size: 14px;
+  color: #333333;
+  font-family: "Open Sans", sans-serif;
+  white-space: nowrap;
+  align-items: center;
+  border-radius: 16px;
+}
+.chip-content {
+  cursor: inherit;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0 5px;
 }

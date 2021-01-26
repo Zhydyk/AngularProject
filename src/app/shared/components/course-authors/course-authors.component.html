@@ -1,11 +1,24 @@
-<div class="course-authors-container">
-  <label for="authors" class="course-authors-label">Authors:<span>* required</span></label>
+<div [formGroup]="authorFormGroup" class="course-authors-container">
+  <label for="authors" class="course-authors-label"
+    >Authors:<span>* required</span></label
+  >
+  <div formArrayName="authorArray">
     <input
       id="course-authors-input"
       class="course-authors-input"
       type="text"
-      [ngModel]="courseAuthors"
       placeholder="Start typing"
+      formControlName="authors"
       required
-    >
+    />
+    <!-- <button (click)="dropAuthor(i)">X</button> -->
+  </div>
+  <!-- <div class="chip-main">
+    <div class="chip" *ngFor="let author of authors">
+      <div class="chip-content">{{ author.name }}</div>
+      <div class="chip-close" (click)="dropAuthor($event)">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div> -->
 </div>

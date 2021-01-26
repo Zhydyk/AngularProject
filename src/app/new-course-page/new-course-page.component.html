@@ -7,12 +7,18 @@
   </breadcrumbs>
   <div class="new-course-page-container">
     <new-course-forms
-      [course]="course$ | async"
+      *ngIf="course$ | async as course"
+      [course]="course"
+      [authorsList]="authors$ | async"
       (emitSubmit)="createNewCourse($event)"
       (emitCancel)="onCancel()"
     >
     </new-course-forms>
   </div>
 </section>
+
+<div *ngFor="let author of authors$ | async">
+  {{author.name}}
+</div>
 
 <spinner *ngIf="isLoading"></spinner>

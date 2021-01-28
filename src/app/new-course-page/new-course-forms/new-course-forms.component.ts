@@ -10,7 +10,6 @@ import {
   AbstractControl,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -100,12 +99,21 @@ export class NewCourseFormsComponent implements OnInit {
       ],
       length: [
         this.courseValue.length,
+        {
+          validators: [Validators.required, Validators.pattern("^[0-9]*$")],
+        },
       ],
       date: [
         this.courseValue.date,
+        {
+          validators: [Validators.required],
+        },
       ],
       authors: [
         this.courseValue.authors,
+        {
+          validators: [Validators.required],
+        },
       ],
     });
   }

@@ -1,16 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Output,
-  EventEmitter,
-  OnDestroy,
 } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'course-date',
@@ -25,45 +21,29 @@ import { Subscription } from 'rxjs';
     },
   ],
 })
-export class CourseDateComponent implements ControlValueAccessor, OnDestroy {
+export class CourseDateComponent implements ControlValueAccessor {
   public formControl: FormControl;
   public onChange = (_: string) => {};
   public onTouched = () => {};
+  public date: string;
 
-  private subscription: Subscription;
-
-  @Output() courseDateChange = new EventEmitter<Date>();
-
-  public ngOnInit(): void {
-    this.formControl = new FormControl('');
-    this.subscription = this.formControl.valueChanges.subscribe((value) => {
-      this.onChange(value);
-    });
-  }
-  onDateChange(model: Date): void {
-    this.courseDateChange.emit(model);
-  }
-
-  writeValue(value: string) {
-    console.log('course-date', value);
-    if (!value) {
-      return;
+  public writeValue(value: string) {
+    if(!value) {
+      return this.date = null;
     }
-    this.formControl.setValue(value.substring(0, 10), {
-      emitEvent: false,
-      onlySelf: true,
-    });
+    this.date = value.substring(0, 10);
   }
 
-  registerOnTouched(fn: any) {
+  public registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
 
-  registerOnChange(fn: any) {
+  public registerOnChange(fn: any) {
     this.onChange = fn;
   }
 
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  public myDateChange(event) {
+    this.date = event.target.value;
+    this.onChange(this.date)
   }
 }

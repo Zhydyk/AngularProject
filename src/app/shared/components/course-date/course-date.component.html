@@ -5,7 +5,7 @@
       class="course-date-input"
       type="date"
       placeholder="MM/DD/YYYY"
-      [formControl]="formControl"
-      required
+      [value]="date"
+      (change)="myDateChange($event)"
     >
 </div>

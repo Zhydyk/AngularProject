@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -42,8 +43,8 @@ export class NewCourseFormsComponent implements OnInit {
     return this.groupForms.get('date');
   }
 
-  get authors(): AbstractControl {
-    return this.groupForms.get('authors');
+  get authors() {
+    return this.groupForms.get('authors') as FormArray;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -71,28 +72,16 @@ export class NewCourseFormsComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log('dddddddddddddd', this.course);
+    console.log('new course forms ONSUBMIT', this.groupForms.value);
     this.emitSubmit.emit(
       this.course
-        ? { ...this.groupForms.value, id: this.course.id }
+        ? { ...this.groupForms.value, id: this.course.id}
         : { ...this.groupForms.value }
     );
   }
 
   public onCancel(): void {
     this.emitCancel.emit();
-  }
-
-  public ngOnChanges(): void {
-    // if (this.course) {
-    //   this.courseValue = this.course;
-    //   console.log('courseValue', this.courseValue);
-    //   this.title.setValue(this.courseValue.name);
-    //   this.description.setValue(this.courseValue.description);
-    //   this.duration.setValue(this.courseValue.length);
-    //   this.date.setValue(this.courseValue.date);
-    //   this.authors.setValue(this.courseValue.authors);
-    // }
   }
 
   private buildForm(): void {
@@ -111,40 +100,13 @@ export class NewCourseFormsComponent implements OnInit {
       ],
       length: [
         this.courseValue.length,
-        // s
       ],
       date: [
         this.courseValue.date,
-        // {
-        //   validators: [Validators.required, Validators.maxLength(500)],
-        // },
       ],
       authors: [
-        [this.courseValue.authors],
-        // {
-        //   validators: [Validators.required, Validators.maxLength(500)],
-        // },
+        this.courseValue.authors,
       ],
     });
   }
-
-  // private buildForm(): void {
-  //   this.groupForms = this.fb.group({
-  //     title: [
-  //       '',
-  //       {
-  //         validators: [Validators.required, Validators.maxLength(50)],
-  //       },
-  //     ],
-  //     description: [
-  //       '',
-  //       {
-  //         validators: [Validators.required, Validators.maxLength(500)],
-  //       },
-  //     ],
-  //     duration: new FormControl(),
-  //     date: new FormControl(),
-  //     authors: new FormControl(),
-  //   });
-  // }
 }

@@ -1,7 +1,18 @@
-<form [formGroup]="groupForms" (ngSubmit)="onSubmit()" class="new-course-forms-wrapper">
-  {{ groupForms.value | json}}
+<form
+  [formGroup]="groupForms"
+  (ngSubmit)="onSubmit()"
+  class="new-course-forms-wrapper"
+>
+  {{ groupForms.value | json }}
   <div class="new-course-forms-title">
-    <label for="title" class="new-course-forms-label">Title:<span>* required</span></label>
+    <label for="title" class="new-course-forms-label"
+      >Title:<span *ngIf="groupForms.get('name').errors?.required"
+        >* required</span
+      >
+      <span *ngIf="groupForms.get('name').errors?.maxlength"
+        >max 50 characters</span
+      >
+    </label>
     <input
       type="text"
       id="new-course-forms-title"
@@ -9,10 +20,17 @@
       placeholder="Text input"
       formControlName="name"
       required
-    >
+    />
   </div>
   <div class="new-course-forms-description">
-    <label for="description" class="new-course-forms-label">Description:<span>* required</span></label>
+    <label for="description" class="new-course-forms-label"
+      >Description:
+      <span *ngIf="groupForms.get('description').errors?.required">
+        * required
+      </span>
+      <span *ngIf="groupForms.get('description').errors?.maxlength">
+        max 500 characters
+      </span></label>
     <textarea
       id="new-course-forms-description"
       class="new-course-forms-textarea"
@@ -25,17 +43,14 @@
     </textarea>
   </div>
   <div class="new-course-forms-date-duration">
-    <course-duration
-      formControlName="length"
-    >
+    <course-duration formControlName="length">
     </course-duration>
-    <course-date
-      formControlName="date"
-    >
-    </course-date>
+    <course-date formControlName="date"> </course-date>
   </div>
   <div class="new-course-forms-authors">
-    <course-authors formControlName="authors"
+    <course-authors
+      [authorsList]="authorsList"
+      formControlName="authors"
     ></course-authors>
   </div>
   <div class="new-course-forms-submit-buttons">
@@ -46,7 +61,7 @@
         class="sumbit-buttons-cancel"
         (click)="onCancel()"
       >
-      Cancel
+        Cancel
       </button>
       <button
         id="new-forms-submit"

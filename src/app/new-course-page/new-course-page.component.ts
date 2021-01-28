@@ -21,13 +21,14 @@ export class NewCoursePageComponent implements OnInit {
   public isLoading = false;
   public course: Courses = {
     id: null,
-    name: null,
-    description: null,
+    name: '',
+    description: '',
     isTopRated: null,
     date: null,
     authors: null,
     length: null,
   };
+  public editMode = false;
 
   constructor(
     private courseService: CoursePageService,
@@ -42,18 +43,20 @@ export class NewCoursePageComponent implements OnInit {
 
     this.courseId = this.route.snapshot.paramMap.get('id');
     if (+this.courseId !== 0) {
+      this.editMode = true;
       this.isLoading = true;
       this.course$ = this.courseService
         .getItemById(+this.courseId)
         .pipe(finalize(() => (this.isLoading = false)));
     } else {
+      this.editMode = false;
       this.course$ = of(this.course);
     }
   }
 
   public createNewCourse(course: Partial<Courses>): void {
     console.log(this.course$);
-    if (this.course$) {
+    if (this.editMode) {
       console.log('editttt course');
       this.store.dispatch(fromCourseAction.editCourse({ course }));
     } else {

@@ -6,7 +6,7 @@
       <div class="login-page-form-field">
         <label for="login" class="login-page-form-field-label">
           Email:
-          <span class="login-page-form-field-required">
+          <span *ngIf="loginForm.get('login').errors?.required">
             * required
           </span>
         </label>
@@ -21,8 +21,11 @@
       <div class="login-page-form-field">
         <label for="password" class="login-page-form-field-label">
           Password:
-          <span class="login-page-form-field-required">
+          <span *ngIf="loginForm.get('password').errors?.required">
             * required
+          </span>
+          <span *ngIf="loginForm.get('password').errors?.minlength">
+            min length 4 symbols
           </span>
         </label>
         <input

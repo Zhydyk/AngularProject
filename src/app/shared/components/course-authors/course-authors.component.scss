@@ -13,13 +13,16 @@
   }
 
   &-input {
-    padding: 7px;
-    border: 1px solid $borderColorLightGrey;
+    min-width: 2px;
+    border: none;
   }
 }
 
 .chip-main {
   display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #abacad;
+  padding: 5px;
 }
 
 .chip {

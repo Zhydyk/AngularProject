@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpCoursesRequestService } from 'src/app/api/http-course-request/http-courses-request.service';
 import { AmountOfCourses } from 'src/app/models/amount-of-courses.interface';
 import { Courses } from 'src/app/models/course.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +61,7 @@ export class CoursePageService {
 
   private formatCourses(course: Partial<Courses>): Courses {
     return {
-      id: course.id || null,
+      id: course.id || uuidv4(),
       name: course.name || null,
       description: course.description || null,
       isTopRated: course.isTopRated || false,

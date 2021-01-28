@@ -2,23 +2,28 @@
   <label for="authors" class="course-authors-label"
     >Authors:<span>* required</span></label
   >
-  <div formArrayName="authorArray">
-    <input
-      id="course-authors-input"
-      class="course-authors-input"
-      type="text"
-      placeholder="Start typing"
-      formControlName="authors"
-      required
-    />
-    <!-- <button (click)="dropAuthor(i)">X</button> -->
-  </div>
-  <!-- <div class="chip-main">
-    <div class="chip" *ngFor="let author of authors">
-      <div class="chip-content">{{ author.name }}</div>
-      <div class="chip-close" (click)="dropAuthor($event)">
+  <div class="chip-main">
+    <div
+      class="chip"
+      formArrayName="authorsArray"
+      *ngFor="let author of authorsArray?.controls; index as idx"
+    >
+      <input
+        id="course-authors-input"
+        class="chip-content course-authors-input"
+        type="text"
+        placeholder="Start typing"
+        [formControlName]="idx"
+      />
+      <div class="chip-close" (click)="dropAuthor(idx)">
         <i class="fa fa-times-circle" aria-hidden="true"></i>
       </div>
     </div>
-  </div> -->
+    <select name="authorsOption" (change)="addAuthor($event)">
+      <option value="" disabled selected>Please choose</option>
+      <option *ngFor="let author of authorsList" [value]="author.id">
+        {{ author.name }}
+      </option>
+    </select>
+  </div>
 </div>

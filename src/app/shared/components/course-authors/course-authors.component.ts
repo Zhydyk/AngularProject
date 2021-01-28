@@ -2,15 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 
 import {
   ControlValueAccessor,
   FormArray,
-  FormArrayName,
   FormBuilder,
-  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
@@ -30,42 +29,44 @@ import { AuthorList } from 'src/app/models/course.interface';
     },
   ],
 })
-export class CourseAuthorsComponent implements ControlValueAccessor, OnInit {
-  public onChange = (_: string) => {};
+export class CourseAuthorsComponent implements ControlValueAccessor, OnInit, OnDestroy {
+  public onChange = (list: AuthorList[]) => {};
   public onTouched = () => {};
-  public formArrayAuthors = new FormArray([])
   public authorFormGroup: FormGroup;
 
   private subscription: Subscription;
 
-  get authors(): FormArray {
-    return this.formArrayAuthors.get('authors') as FormArray;
+  get authorsArray(): FormArray {
+    return this.authorFormGroup.get('authorsArray') as FormArray;
   }
 
-  // @Input()
+  @Input()
   public authorsList: AuthorList[] = [];
+  public currentAuthorLists: AuthorList[] = [];
 
   constructor(private fb: FormBuilder) {}
 
   public ngOnInit(): void {
     this.authorFormGroup = this.fb.group({
-      authorArray: new FormArray([])
+      authorsArray: new FormArray([])
     })
-    // this.formControl = new FormControl('');
-    // this.subscription = this.formControl.valueChanges.subscribe((value) => {
-    //   this.onChange(value);
-    // });
+
+    this.subscription = this.authorsArray.valueChanges.subscribe((value) => {
+      console.log('subscription author',value);
+      this.onChange(value)
+    })
   }
 
   public writeValue(value: AuthorList[]) {
-    console.log(value);
-    if (!value) {
-      return [];
-    }
-
-    this.authorsList = [...value];
-    // this.authors = value;
-    // this.formControl.setValue(value, { emitEvent: false, onlySelf: true });
+    console.log('component authors, write value', value);
+    this.currentAuthorLists = [...value];
+    value.forEach(item => {
+      return this.authorsArray.push(this.fb.control({
+        value: item.name,
+        disabled: true
+      }))
+    })
+    console.log(this.authorsArray.value)
   }
 
   public registerOnTouched(fn: any) {
@@ -76,12 +77,16 @@ export class CourseAuthorsComponent implements ControlValueAccessor, OnInit {
     this.onChange = fn;
   }
   
-  public addAuthor() {
-    this.formArrayAuthors.push(new FormControl(''))
+  public addAuthor(choosenAuthorsId) {
+    const findAuthor = this.authorsList.find(item => item.id === choosenAuthorsId.target.value);
+    this.currentAuthorLists.push(findAuthor);
+    this.onChange(this.currentAuthorLists);
   }
 
   dropAuthor(index: number): void {
-    this.formArrayAuthors.removeAt(index);
+    console.log(index)
+    this.currentAuthorLists.slice(index, 1);
+    this.onChange(this.currentAuthorLists);
   }
 
   public ngOnDestroy(): void {

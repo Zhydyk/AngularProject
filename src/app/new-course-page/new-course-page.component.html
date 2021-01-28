@@ -17,8 +17,4 @@
   </div>
 </section>
 
-<div *ngFor="let author of authors$ | async">
-  {{author.name}}
-</div>
-
 <spinner *ngIf="isLoading"></spinner>

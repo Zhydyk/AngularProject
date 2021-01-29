@@ -14,7 +14,7 @@ export class HttpCoursesRequestService {
   constructor(private httpRequest: HttpClient) {}
 
   public getCourses(amountOfCourses: AmountOfCourses): Observable<Courses[]> {
-    return this.httpRequest.get<Courses[]>(`${this.courseUrl}/courses?sort=${amountOfCourses.sort}&count=${amountOfCourses.count}&textFragment=${amountOfCourses.search || null}`);
+    return this.httpRequest.get<Courses[]>(`${this.courseUrl}/courses`, { params: {...amountOfCourses} });
   }
 
   public getCourseById(id: number): Observable<Courses> {

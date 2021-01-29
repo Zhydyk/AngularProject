@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { catchError, map, pluck, switchMap } from 'rxjs/operators';
+import { catchError, concatMap, map, pluck, switchMap } from 'rxjs/operators';
 import { Courses } from 'src/app/models/course.interface';
 import { CoursePageService } from 'src/app/shared/services/course-page.service';
 import * as fromCourseAction from '../actions/course.action';
@@ -85,7 +85,7 @@ export class CourseEffects {
   public editCourse$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
       ofType(fromCourseAction.editCourse),
-      switchMap(({ course }) => {
+      concatMap(({ course }) => {
         return this.coursePageService.updateCourse(course).pipe(
           map(() => fromCourseAction.editCourseSuccess({ course })),
           catchError((err) => of(fromCourseAction.editCourseError(err)))

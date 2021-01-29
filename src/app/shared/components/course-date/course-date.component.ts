@@ -1,23 +1,49 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'course-date',
   templateUrl: './course-date.component.html',
   styleUrls: ['./course-date.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: CourseDateComponent,
+      multi: true,
+    },
+  ],
 })
-export class CourseDateComponent {
-  private date: string;
+export class CourseDateComponent implements ControlValueAccessor {
+  public formControl: FormControl;
+  public onChange = (_: string) => {};
+  public onTouched = () => {};
+  public date: string;
 
-  @Input()
-  get courseDate(): Date | string { return this.date;}
-  set courseDate(date: Date | string) {
-    this.date = (date instanceof Date) ? date.toISOString().substring(0, 10) : date;
+  public writeValue(value: string) {
+    if(!value) {
+      return this.date = null;
+    }
+    this.date = value.substring(0, 10);
   }
 
-  @Output() courseDateChange = new EventEmitter<Date>();
+  public registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
 
-  onDateChange(model: Date): void {
-    this.courseDateChange.emit(model);
+  public registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+
+  public myDateChange(event) {
+    this.date = event.target.value;
+    this.onChange(this.date)
   }
 }

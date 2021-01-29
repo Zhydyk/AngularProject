@@ -1,51 +1,74 @@
-<form class="new-course-forms-wrapper">
+<form
+  [formGroup]="groupForms"
+  (ngSubmit)="onSubmit()"
+  class="new-course-forms-wrapper"
+>
+  {{ groupForms.value | json }}
   <div class="new-course-forms-title">
-    <label for="title" class="new-course-forms-label">Title:<span>* required</span></label>
+    <label for="title" class="new-course-forms-label"
+      >Title:<span *ngIf="groupForms.get('name').errors?.required"
+        >* required</span
+      >
+      <span *ngIf="groupForms.get('name').errors?.maxlength"
+        >max 50 characters</span
+      >
+    </label>
     <input
-      class="new-course-forms-input"
       type="text"
-      name="courseTitle"
       id="new-course-forms-title"
+      class="new-course-forms-input"
       placeholder="Text input"
-      [(ngModel)]="courseValue.name"
+      formControlName="name"
       required
-    >
+    />
   </div>
   <div class="new-course-forms-description">
-    <label for="description" class="new-course-forms-label">Description:<span>* required</span></label>
+    <label for="description" class="new-course-forms-label"
+      >Description:
+      <span *ngIf="groupForms.get('description').errors?.required">
+        * required
+      </span>
+      <span *ngIf="groupForms.get('description').errors?.maxlength">
+        max 500 characters
+      </span></label>
     <textarea
-      class="new-course-forms-textarea"
-      name="description"
-      placeholder="Add description"
       id="new-course-forms-description"
+      class="new-course-forms-textarea"
+      placeholder="Add description"
       cols="30"
       rows="10"
-      [(ngModel)]="courseValue.description"
+      formControlName="description"
       required
     >
     </textarea>
   </div>
   <div class="new-course-forms-date-duration">
-    <course-duration
-      [(courseDuration)]="courseValue.length"
-    >
+    <course-duration formControlName="length">
     </course-duration>
-    <course-date
-      [(courseDate)]="courseValue.date"
-    >
-    </course-date>
+    <course-date formControlName="date"> </course-date>
   </div>
   <div class="new-course-forms-authors">
-    <course-authors
+    <course-authors [authorsList]="authorsList" formControlName="authors"
     ></course-authors>
   </div>
   <div class="new-course-forms-submit-buttons">
-    <submit-buttons
-      cancelButton="Cancel"
-      submitButton="Submit"
-      (cancel)="onCancel()"
-      (submit)="onSubmit()"
-    >
-    </submit-buttons>
+    <div class="sumbit-buttons-main">
+      <button
+        id="new-forms-cancel"
+        type="submit"
+        class="sumbit-buttons-cancel"
+        (click)="onCancel()"
+      >
+        Cancel
+      </button>
+      <button
+        id="new-forms-submit"
+        type="submit"
+        class="sumbit-buttons-confirm"
+        [disabled]="!groupForms.valid"
+      >
+        Submit
+      </button>
+    </div>
   </div>
 </form>

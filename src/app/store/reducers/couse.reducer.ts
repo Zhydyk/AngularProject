@@ -65,7 +65,7 @@ const reducer = createReducer(
 
   on(
     fromCourseAction.deleteCourseSuccess,
-    (state: CourseState, { course }: { course: Courses }): CourseState => {
+    (state: CourseState, { course }: { course: Courses }) => {
       console.log('delete course success');
       const filterDeletedCourse = state.courses.filter(
         (value) => value.id !== course.id
@@ -79,45 +79,30 @@ const reducer = createReducer(
 
   on(
     fromCourseAction.editCourseSuccess,
-    (state: CourseState, { course }: { course: Partial<Courses> }): CourseState => {
-      console.log('edit course success');
-      const editCourse: Courses[] = state.courses.map((courseItem) => courseItem.id === course.id ? courseItem = course as Courses : courseItem);
+    (state: CourseState, { course }) => {
+      console.log('edit/new course success');
+      const newValue = state.courses.map((item) => (item.id === course.id) ? item = course as Courses : item) 
+      console.log('newValue', newValue)
       return {
         ...state,
-        courses: editCourse,
-      };
-    }
-  ),
-  on(
-    fromCourseAction.addNewCourseSuccess,
-    (
-      state: CourseState,
-      { course }: { course: Partial<Courses> }
-    ): CourseState => {
-      console.log('add new course success');
-      const addNewCourse = state.courses;
-      addNewCourse.push(course as Courses);
-      console.log(addNewCourse)
-      return {
-        ...state,
-        courses: addNewCourse
+        courses: newValue
       };
     }
   ),
   on(fromCourseAction.editCourse, (state) => {
-    console.log('load more');
+    console.log('Edit Course');
     return {
       ...state,
     };
   }),
   on(fromCourseAction.addCourse, (state) => {
-    console.log('load more');
+    console.log('Add course');
     return {
       ...state,
     };
   }),
   on(fromCourseAction.deleteCourse, (state) => {
-    console.log('load more');
+    console.log('Delete course');
     return {
       ...state,
     };

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpCoursesRequestService } from 'src/app/api/http-course-request/http-courses-request.service';
 import { AmountOfCourses } from 'src/app/models/amount-of-courses.interface';
 import { Courses } from 'src/app/models/course.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CoursePageService {
   public getList(): Observable<Courses[]> {
     const amountOfCourses: AmountOfCourses = {
       sort: 'date',
-      count: this.countOfCourse,
+      count: `${this.countOfCourse}`,
     }
     return this.httpCourseService.getCourses(amountOfCourses);
   }
@@ -30,7 +31,7 @@ export class CoursePageService {
 
   public getCourseBySearch(searchElement: string): Observable<Courses[]> {
     const amountOfCourses: AmountOfCourses = {
-      search: searchElement,
+      textFragment: searchElement,
       sort: 'date',
     }
 
@@ -51,7 +52,7 @@ export class CoursePageService {
   public getLoadMoreCourses(): Observable<Courses[]> {
     this.countOfCourse += 3;
     const loadMoreCorses: AmountOfCourses = {
-      count: this.countOfCourse,
+      count: `${this.countOfCourse}`,
       sort: 'date',
     }
 
@@ -60,7 +61,7 @@ export class CoursePageService {
 
   private formatCourses(course: Partial<Courses>): Courses {
     return {
-      id: course.id || null,
+      id: course.id || uuidv4(),
       name: course.name || null,
       description: course.description || null,
       isTopRated: course.isTopRated || false,

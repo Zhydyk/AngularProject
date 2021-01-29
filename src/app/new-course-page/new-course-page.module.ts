@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbsModule } from '../shared/components/breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../shared/components/footer/footer.module';
@@ -19,6 +20,7 @@ import { NewCoursePageComponent } from './new-course-page.component';
     LoginButtonsModule,
     RouterModule,
     SpinnerModule,
+    ReactiveFormsModule,
   ],
   declarations: [NewCoursePageComponent],
   exports: [NewCoursePageComponent],

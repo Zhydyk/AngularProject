@@ -1,5 +1,6 @@
 export interface AmountOfCourses {
+  start?: string;
+  count?: string;
   sort?: string;
-  count?: number;
-  search?: string;
+  textFragment?: string;
 }

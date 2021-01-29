@@ -4,8 +4,8 @@
       id="course-date-input"
       class="course-date-input"
       type="date"
-      [ngModel]="courseDate"
-      (ngModelChange)="onDateChange($event)"
-      required
+      placeholder="MM/DD/YYYY"
+      [value]="date"
+      (change)="myDateChange($event)"
     >
 </div>

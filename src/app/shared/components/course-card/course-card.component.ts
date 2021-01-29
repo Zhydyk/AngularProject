@@ -32,6 +32,7 @@ export class CourseCardComponent {
 
   public deleteCourse(): void {
     this.delete.emit(this.course);
+    this.showModal = false;
   }
   
   public editCourse(): void {
@@ -39,10 +40,6 @@ export class CourseCardComponent {
   }
 
   public hideModal() {
-    this.showModal = false;
-  }
-
-  public confirmDelete() {
     this.showModal = false;
   }
 

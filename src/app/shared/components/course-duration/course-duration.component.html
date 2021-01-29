@@ -3,7 +3,7 @@
     for="duration"
     class="course-duration-label"
   >
-    Duration:<span>* required</span></label
+    Duration:<ng-content></ng-content></label
   >
   <div class="course-duration">
     <input
@@ -11,10 +11,9 @@
       type="number"
       class="course-duration-input"
       placeholder="minutes"
-      [ngModel]="courseDuration"
-      (ngModelChange)="onDurationChange($event)"
+      [formControl]="formControl"
       required
     />
-    <p>{{ courseDuration | duration }}</p>
+    <p>{{ formControl.value | duration }}</p>
   </div>
 </div>

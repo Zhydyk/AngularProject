@@ -5,6 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AuthStoreModule } from './modules/auth-store.module';
+import { AuthorStoreModule } from './modules/author.module';
 import { CourseStoreModule } from './modules/course-store.module';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CourseStoreModule } from './modules/course-store.module';
     }),
     AuthStoreModule,
     CourseStoreModule,
+    AuthorStoreModule,
   ],
 })
 export class RootStoreModule {}

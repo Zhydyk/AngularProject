@@ -20,11 +20,12 @@
     <div class="course-card-buttons">
       <button class="primary-button edit-btn" [routerLink]="['/courses', course.id]" (click)="editCourse()">
         <i class="fa fa-pencil" aria-hidden="true"></i>
-        Edit
+        {{ 'courseCardPage.edit' | translate }}
       </button>
       <button class="primary-button delete-btn" (click)="showDeleteModal()">
         <i class="fa fa-trash" aria-hidden="true"></i>
-        Delete
+        {{ 'courseCardPage.delete' | translate }}
+
       </button>
     </div>
   </div>

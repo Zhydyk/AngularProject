@@ -1,0 +1,57 @@
+{
+  "coursePage": {
+    "breadcrumbsCourse": "Courses",
+    "addCourse": "Add course"
+  },
+  "courseListPage": {
+    "loadMore": "Load more...",
+    "noData": "NO DATA FEEL FREE TO ADD NEW COURSE"
+  },
+  "loginPage": {
+    "login": "Login",
+    "required": "* required",
+    "email": "Email:",
+    "password": "Password:",
+    "minLength": "min length 4 symbols",
+    "forgotPassword": "Forgot password?",
+    "logOut": "Log out"
+  },
+  "newCoursePage": {
+    "courses": "Courses /"
+  },
+  "newCourseFormPage": {
+    "title": "Title:",
+    "required": "* required",
+    "maxLengthFifty": "max 50 characters",
+    "description": "Description:",
+    "maxLengthFiveHundred": "max 500 characters",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "courseAuthorPage": {
+    "authors": "Authors:",
+    "required": "* required",
+    "pleaseChoose": "Please choose"
+  },
+  "courseCardPage": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "courseDatePage": {
+    "date": "Date: ",
+    "required": "* required"
+  },
+  "courseDurationPage": {
+    "duration": "Duration:"
+  },
+  "deleteModalPage": {
+    "cancel": "Cancel",
+    "yesDelete": "Yes, delete"
+  },
+  "footer": {
+    "footerInfo": "Copyright © Videocourses. All rights reserved"
+  },
+  "header": {
+    "videoCourse": "VIDEO COURSE"
+  }
+}

@@ -3,7 +3,7 @@
 </app-header>
 <div class="course-page-main">
   <breadcrumbs>
-    <a href="#" class="breadcrumbs-text">Courses</a>
+    <a href="#" class="breadcrumbs-text">{{ 'coursePage.breadcrumbsCourse' | translate }}</a>
   </breadcrumbs>
   <div class="course-page-container">
     <div class="course-page-search">
@@ -11,7 +11,7 @@
     </div>
     <div class="course-page-newcourse">
       <button class="primary-button" routerLink="./new">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i>Add course
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>{{ 'coursePage.addCourse' | translate }}
       </button>
     </div>
     <course-lists

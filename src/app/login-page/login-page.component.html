@@ -2,12 +2,12 @@
 <section class="login-page-main">
   <div class="login-page-container">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <h1 class="h1">Login</h1>
+      <h1 class="h1">{{ 'loginPage.login' | translate }}</h1>
       <div class="login-page-form-field">
         <label for="login" class="login-page-form-field-label">
-          Email:
+          {{ 'loginPage.email' | translate }}
           <span *ngIf="loginForm.get('login').errors?.required">
-            * required
+            {{ 'loginPage.required' | translate }}
           </span>
         </label>
         <input
@@ -20,12 +20,12 @@
       </div>
       <div class="login-page-form-field">
         <label for="password" class="login-page-form-field-label">
-          Password:
+          {{ 'loginPage.password' | translate }}
           <span *ngIf="loginForm.get('password').errors?.required">
-            * required
+            {{ 'loginPage.required' | translate }}
           </span>
           <span *ngIf="loginForm.get('password').errors?.minlength">
-            min length 4 symbols
+            {{ 'loginPage.minLength' | translate }}
           </span>
         </label>
         <input
@@ -37,13 +37,13 @@
         >
       </div>
       <div class="login-page-buttons">
-        <a class="login-page-buttons-link">Forgot password?</a>
+        <a class="login-page-buttons-link">{{ 'loginPage.forgotPassword' | translate }}</a>
         <button
           type="submit"
           [disabled]="!loginForm.valid"
           class="login-page-buttons-login"
         >
-          Login
+        {{ 'loginPage.login' | translate }}
         </button>
       </div>
     </form>

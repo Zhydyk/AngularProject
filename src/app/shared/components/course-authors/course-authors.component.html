@@ -1,6 +1,6 @@
 <div class="course-authors-container">
   <label for="authors" class="course-authors-label"
-    >Authors:<span>* required</span></label
+    >{{ 'courseAuthorPage.authors' | translate }}<span>{{ 'courseAuthorPage.required' | translate }}</span></label
   >
   <div class="chip-main">
     <div
@@ -21,7 +21,7 @@
       </div>
     </div>
     <select id="course-authors-list" name="authorsOption"  (change)="addAuthor($event)" #chooseAuthors>
-      <option value="" disabled selected>Please choose</option>
+      <option value="" disabled selected>{{ 'courseAuthorPage.pleaseChoose' | translate }}</option>
       <option *ngFor="let author of authorsList" [value]="author.id">{{author.name}}</option>
     </select>
   </div>

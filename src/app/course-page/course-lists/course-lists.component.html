@@ -7,11 +7,12 @@
     (delete)="onDeleteCourse($event)"
   >
   </course-card>
-  <div class="course-lists-load-more"><a (click)="onLoadMore()">Load more...</a></div>
+  <div class="course-lists-load-more"><a (click)="onLoadMore()">{{ 'courseListPage.loadMore' | translate }}
+  </a></div>
 </div>
 
 <ng-template #noDataAboutCourseList>
   <div class="course-lists-no-data">
-    NO DATA FEEL FREE TO ADD NEW COURSE
+    {{ 'courseListPage.noData' | translate }}
   </div>
 </ng-template>

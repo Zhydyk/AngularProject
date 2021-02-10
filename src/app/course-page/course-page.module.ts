@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { BreadcrumbsModule } from '../shared/components/breadcrumbs/breadcrumbs.module';
 import { DeleteModalModule } from '../shared/components/delete-modal/delete-modal.module';
 import { HeaderModule } from '../shared/components/header/header.module';
@@ -21,6 +22,7 @@ import { CourseSearchModule } from './course-search/course-search.module';
     BreadcrumbsModule,
     CoursePageRoutingModule,
     SpinnerModule,
+    TranslateModule,
   ],
   declarations: [CoursePageComponent],
   exports: [CoursePageComponent],
